@@ -9,10 +9,12 @@ const bodyParser = require('body-parser');
 // Importer mongoose connexion base de donnée mongoDB
 const mongoose = require("./db/db");
 
-// Importer la route des sauces
-const postRoutes = require('./routes/post');
-// Importer la route des users
+// Importer la route de user
 const userRoutes = require('./routes/user');
+// Importer la route de profilUser
+const profilRoutes = require('./routes/profil');
+// Importer la route de post
+// const postRoutes = require('./routes/post');
 
 // Importer les chemins de fichiers et de répertoires
 const path = require('path');
@@ -48,7 +50,11 @@ app.use(bodyParser.json());
 // Transformer le corps (le body) en json objet javascript utilisable req.body
 // app.use(express.json());
 
+// La route de l'authentification
 app.use('/api/auth', userRoutes);
+// La route du profil user
+app.use('/api/profil', profilRoutes);
+// La route du post
 // app.use('/api/post', postRoutes);
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));
