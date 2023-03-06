@@ -13,6 +13,8 @@ const userCtrl = require('../controllers/user');
 router.post('/signup', password, userCtrl.signup);
 // La route login
 router.post('/login', userCtrl.login);
+// La route logout
+// router.get("/logout", auth.logout);
 
 // Exporter le module
 module.exports = router;

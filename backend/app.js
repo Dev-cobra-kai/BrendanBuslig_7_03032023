@@ -11,7 +11,7 @@ const mongoose = require("./db/db");
 
 // Importer la route de user
 const userRoutes = require('./routes/user');
-// Importer la route de profilUser
+// Importer la route de profil
 const profilRoutes = require('./routes/profil');
 // Importer la route de post
 // const postRoutes = require('./routes/post');
@@ -44,10 +44,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Transformer le body en JSON
+// Transformer le body en JSON avec bodu-parser
 app.use(bodyParser.json());
 
-// Transformer le corps (le body) en json objet javascript utilisable req.body
+// Transformer le body en JSON avec express
 // app.use(express.json());
 
 // La route de l'authentification
@@ -57,7 +57,8 @@ app.use('/api/profil', profilRoutes);
 // La route du post
 // app.use('/api/post', postRoutes);
 
-// app.use('/images', express.static(path.join(__dirname, 'images')));
+// Acceder aux images du dossier images
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Exporter app.js pour pouvoir y accèder depuis un autre fichier
 module.exports = app;

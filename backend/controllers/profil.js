@@ -18,13 +18,13 @@ exports.getOneProfil = (req, res, next) => {
         .catch((error) => { res.status(404).json({ error }) });
 };
 
-// Créer un nouveau profil user
+// Créer un nouveau profil
 exports.createProfil = (req, res, next) => {
     const profilObject = JSON.parse(req.body.profil);
     delete profilObject._id;
     const profil = new Profil({
         ...profilObject,
-        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     });
     profil.save()
         .then(() => res.status(201).json({ message: 'Nouveau profil créée !' }))
@@ -72,36 +72,36 @@ exports.deleteProfil = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-// // Liker et disliker une sauce
-// exports.likeSauce = (req, res, next) => {
-//     const sauceLikeObject = req.body;
-//     console.log(sauceLikeObject);
-//     Sauce.findOne({ _id: req.params.id })
-//         .then((sauce) => {
-//             // like = +1
-//             if ((!sauce.usersLiked.includes(req.body.userId)) && (req.body.like == 1)) {
-//                 Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: 1 }, $push: { usersLiked: req.body.userId }, _id: req.params.id })
-//                     .then(() => res.status(201).json({ message: "Like ajouté" }))
-//                     .catch((error) => { res.status(400).json({ error }) });
-//             };
-//             // like = 0
-//             if ((sauce.usersLiked.includes(req.body.userId)) && (req.body.like == 0)) {
-//                 Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: -1 }, $pull: { usersLiked: req.body.userId }, _id: req.params.id })
-//                     .then(() => res.status(201).json({ message: "Like supprimé" }))
-//                     .catch((error) => { res.status(400).json({ error }) });
-//             }
-//             // like = -1 (dislike = +1)
-//             if ((!sauce.usersDisliked.includes(req.body.userId)) && (req.body.like == -1)) {
-//                 Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: 1 }, $push: { usersDisliked: req.body.userId }, _id: req.params.id })
-//                     .then(() => res.status(201).json({ message: "Dislike ajouté" }))
-//                     .catch((error) => { res.status(400).json({ error }) });
-//             };
-//             // dislike = 0
-//             if ((sauce.usersDisliked.includes(req.body.userId)) && (req.body.like == 0)) {
-//                 Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: -1 }, $pull: { usersDisliked: req.body.userId }, _id: req.params.id })
-//                     .then(() => res.status(201).json({ message: "Dislike supprimé" }))
-//                     .catch((error) => { res.status(400).json({ error }) });
-//             }
-//         })
-//         .catch((error) => res.status(404).json({ error }));
-// };
+// Liker et disliker
+exports.likeProfil = (req, res, next) => {
+    const profilLikeObject = req.body;
+    console.log(profilLikeObject);
+    Profil.findOne({ _id: req.params.id })
+        .then((profil) => {
+            // like = +1
+            if ((!profil.usersLiked.includes(req.body.userId)) && (req.body.like == 1)) {
+                Profil.updateOne({ _id: req.params.id }, { $inc: { likes: 1 }, $push: { usersLiked: req.body.userId }, _id: req.params.id })
+                    .then(() => res.status(201).json({ message: "Like ajouté" }))
+                    .catch((error) => { res.status(400).json({ error }) });
+            };
+            // like = 0
+            if ((profil.usersLiked.includes(req.body.userId)) && (req.body.like == 0)) {
+                Profil.updateOne({ _id: req.params.id }, { $inc: { likes: -1 }, $pull: { usersLiked: req.body.userId }, _id: req.params.id })
+                    .then(() => res.status(201).json({ message: "Like supprimé" }))
+                    .catch((error) => { res.status(400).json({ error }) });
+            }
+            // like = -1 (dislike = +1)
+            if ((!profil.usersDisliked.includes(req.body.userId)) && (req.body.like == -1)) {
+                Profil.updateOne({ _id: req.params.id }, { $inc: { dislikes: 1 }, $push: { usersDisliked: req.body.userId }, _id: req.params.id })
+                    .then(() => res.status(201).json({ message: "Dislike ajouté" }))
+                    .catch((error) => { res.status(400).json({ error }) });
+            };
+            // dislike = 0
+            if ((profil.usersDisliked.includes(req.body.userId)) && (req.body.like == 0)) {
+                Profil.updateOne({ _id: req.params.id }, { $inc: { dislikes: -1 }, $pull: { usersDisliked: req.body.userId }, _id: req.params.id })
+                    .then(() => res.status(201).json({ message: "Dislike supprimé" }))
+                    .catch((error) => { res.status(400).json({ error }) });
+            }
+        })
+        .catch((error) => res.status(404).json({ error }));
+};
