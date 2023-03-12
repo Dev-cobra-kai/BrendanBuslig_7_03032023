@@ -6,13 +6,11 @@ const express = require('express');
 // Importer body-parser (Ce module permet d'interpréter, d'où le nom “parser”, le corps JSON d'une réponse HTTP)
 const bodyParser = require('body-parser');
 
-// Importer mongoose connexion base de donnée mongoDB
-const mongoose = require("./db/db");
+// Importer mongoose connexion base de donnée MySql
+const mysql = require("./db/db.mysql");
 
 // Importer la route de user
 const userRoutes = require('./routes/user');
-// Importer la route de profil
-const profilRoutes = require('./routes/profil');
 // Importer la route de post
 // const postRoutes = require('./routes/post');
 
@@ -52,11 +50,8 @@ app.use(bodyParser.json());
 
 // La route de l'authentification
 app.use('/api/auth', userRoutes);
-// La route du profil user
-app.use('/api/profil', profilRoutes);
 // La route du post
 // app.use('/api/post', postRoutes);
-
 // Acceder aux images du dossier images
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

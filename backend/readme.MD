@@ -26,7 +26,6 @@ VALUE :
         "userId": "640616da951f56dfae00bed4",
         "nom": "Dubois",
         "prenom": "Martin",
-        "age": "40",
         "imageUrl": "",
         "__v": 0
     }
