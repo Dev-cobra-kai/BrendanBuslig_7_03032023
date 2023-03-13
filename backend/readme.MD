@@ -14,8 +14,8 @@ Body -> raw -> text = JSON
     "email": "bob@free.fr",
     "password": "Azerty123" 
 }
-## La route POST pour créer le profil 
-http://localhost:3000/api/profil/
+## La route POST pour créer l'user
+http://localhost:3000/api/user/
 Params : KEY -> userId 
          VALUE -> _id user
 Authorization : Bearer Token -> Token : xxxxxxx
@@ -31,20 +31,20 @@ VALUE :
     }
 KEY : image + File
 VALUE : Select Files
-## La route GET pour voir tous les profils 
-http://localhost:3000/api/profil/
+## La route GET pour voir tous les users
+http://localhost:3000/api/user/
 Authorization : Bearer Token -> Token : xxxxxxx
 Body -> raw -> text = JSON
 {
     "userId": "640616da951f56dfae00bed4"
 }
-## La route GET pour voir le profil 
-http://localhost:3000/api/profil/:id
+## La route GET pour voir l'user
+http://localhost:3000/api/user/:id
 Authorization : Bearer Token -> Token : xxxxxxx
 Params : KEY -> userId 
          VALUE -> 640616da951f56dfae00bed4
-## La route PUT pour modifier le profil 
-http://localhost:3000/api/profil/:id
+## La route PUT pour modifier l'user
+http://localhost:3000/api/user/:id
 Params : KEY -> userId 
          VALUE -> _id user
 Authorization : Bearer Token -> Token : xxxxxxx
@@ -61,12 +61,12 @@ VALUE :
     }
 KEY : image + File
 VALUE : Select Files
-## La route DELETE pour modifier le profil 
-http://localhost:3000/api/profil/:id
+## La route DELETE pour modifier l'user
+http://localhost:3000/api/user/:id
 Params : KEY -> userId 
          VALUE -> _id user
 ## La route POST pour like et dislike
-http://localhost:3000/api/profil/:id/like
+http://localhost:3000/api/user/:id/like
 Authorization : Bearer Token -> Token : xxxxxxx
 Body -> raw -> text = JSON
 {

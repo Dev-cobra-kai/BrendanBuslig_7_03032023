@@ -1,5 +1,5 @@
 class Post {
-    constructor(userId, comment, like ){
+    constructor(userId, comment, imageUrl, like ){
       this.userId = userId,
       this.comment = comment,
       this.imageUrl = imageUrl,

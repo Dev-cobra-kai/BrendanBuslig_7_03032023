@@ -12,10 +12,10 @@ const mysql = require('mysql');
 // Se connecter à la base MySQL avec le module mysql
 // Les paramètres
 const mysqldb = mysql.createConnection({
-    host: 'localhost',
-    database: 'groupomania',
+    host: 'localhost',    
     user: 'root',
-    password: ''
+    password: '',
+    database: 'groupomania',
 })
 // La connexion
 mysqldb.connect((err) => {

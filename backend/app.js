@@ -2,23 +2,23 @@
 
 // Importer Express (un framework pour construire des applications web basées sur Node.js)
 const express = require('express');
-
 // Importer body-parser (Ce module permet d'interpréter, d'où le nom “parser”, le corps JSON d'une réponse HTTP)
 const bodyParser = require('body-parser');
-
-// Importer mongoose connexion base de donnée MySql
-const mysql = require("./db/db.mysql");
-
-// Importer la route de user
-const userRoutes = require('./routes/user');
-// Importer la route de post
-// const postRoutes = require('./routes/post');
-
 // Importer les chemins de fichiers et de répertoires
 const path = require('path');
-
 // Importer helmet (Permet de sécuriser vos applications Express en définissant divers en-têtes http)
 const helmet = require('helmet');
+
+// Importer connexion base de donnée MySql
+// const mysql = require("./db/mysql");
+
+// Importer les models de sequelize
+// const db = require("../models");
+
+// Importer la route user
+const userRoutes = require('./routes/user');
+// Importer la route post
+// const postRoutes = require('./routes/post');
 
 // Créer une application Express
 const app = express();

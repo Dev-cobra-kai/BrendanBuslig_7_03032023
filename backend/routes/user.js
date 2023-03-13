@@ -11,8 +11,6 @@ const password = require('../middleware/password');
 
 // Importer controllers/user.js
 const userCtrl = require('../controllers/user');
-// Importer controllers/user.js
-const profilCtrl = require('../controllers/user');
 
 // Les routes pour l'authentification
 // La route signup
@@ -21,14 +19,12 @@ router.post('/signup', password, userCtrl.signup);
 router.post('/login', userCtrl.login);
 // La route logout
 // router.get("/logout", auth.logout);
-
-// Les routes pour le profil
-router.get('/', auth, profilCtrl.getAllProfil);
-router.get('/:id', auth, profilCtrl.getOneProfil);
-router.post('/', auth, multer, profilCtrl.createProfil);
-router.put('/:id', auth, multer, profilCtrl.modifyProfil);
-router.delete('/:id', auth, profilCtrl.deleteProfil);
-router.post('/:id/like', auth, profilCtrl.likeProfil);
+// router.get('/', auth, userCtrl.getAllUser);
+// router.get('/:id', auth, userCtrl.getOneUser);
+// router.post('/', auth, multer, userCtrl.createUser);
+// router.put('/:id', auth, multer, userCtrl.modifyUser);
+// router.delete('/:id', auth, userCtrl.deleteUser);
+// router.post('/:id/like', auth, userCtrl.likeUser);
 
 // Exporter le module
 module.exports = router;
