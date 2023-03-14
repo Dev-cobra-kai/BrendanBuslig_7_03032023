@@ -19,9 +19,9 @@ router.post('/signup', password, userCtrl.signup);
 router.post('/login', userCtrl.login);
 // La route logout
 // router.get("/logout", auth.logout);
-// router.get('/', auth, userCtrl.getAllUser);
+router.get('/', auth, userCtrl.getAllUser);
 // router.get('/:id', auth, userCtrl.getOneUser);
-// router.post('/', auth, multer, userCtrl.createUser);
+router.post('/', auth, multer, userCtrl.createUser);
 // router.put('/:id', auth, multer, userCtrl.modifyUser);
 // router.delete('/:id', auth, userCtrl.deleteUser);
 // router.post('/:id/like', auth, userCtrl.likeUser);

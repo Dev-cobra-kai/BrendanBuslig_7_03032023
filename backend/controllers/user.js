@@ -38,52 +38,67 @@ exports.signup = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-
 // Connecter un user dans la BDD (login)
 exports.login = (req, res, next) => {
-  // Rechercher si le l'utilisateur est présent dans la BDD
-  mysqldb.query("SELECT * FROM user WHERE email = ?", (error, results) => {
-    if (error) {
-      res.json({ error });
-    } else {
-      // L'email de l'utilisateur n'est pas présent dans la base de donnée
-      if (results == 0) {
-        return res.status(404).json({ error: "Utilisateur non trouvé" });
-      }
-      // Controler validité du password
-      bcrypt
-        .compare(req.body.password, results[0].password)
-        .then((controlPassword) => {
-          // Si le password est incorrect
-          if (!controlPassword) {
-            return res
-              .status(401)
-              .json({ error: 'Mot de passe incorrect !' });
+
+  const { email, password } = req.body;
+  const user = new User(email, password);
+
+  // Controler validité du password
+  // bcrypt
+  //   .compare(req.body.password, user.password)
+  //   .then(controlPassword) => {
+  //     // Si le password est incorrect
+  //     if (!controlPassword) {
+  //       return res
+  //         .status(401)
+  //         .json({ error: 'Mot de passe incorrect !' });
+  //     }
+    
+      mysqldb.query("SELECT * FROM user WHERE email = ?", email, (error, results) => {
+        if (error) {
+          console.log('Erreur');
+          res.json({ error });
+        } else {
+          // L'email de l'utilisateur n'est pas présent dans la base de donnée
+          // console.log("-->results");
+          console.log('Pas erreur');
+          res.json({ message : results [0]});
           }
-          // Password correct
-          res.status(200).json({ //({ message: 'Utilisateur trouvé !' })
-            // Encodage du userId
-            userId: user._id,
-            token: jwt.sign(
-              { userId: user._id },
-              'RANDOM_TOKEN_SECRET',
-              { expiresIn: '24h' }
-            )
-          });
         })
-        .catch(error => res.status(500).json({ error }));
-    }
-  });
+      // // Password correct
+      // res.status(200).json({ //({ message: 'Utilisateur trouvé !' })
+      //   // Encodage du userId
+      //   userId: user._id,
+      //   token: jwt.sign(
+      //     { userId: user._id },
+      //     'RANDOM_TOKEN_SECRET',
+      //     { expiresIn: '24h' }
+      //   )
+      // });
+//     .catch(error => res.status(500).json({ error: 'Utilisateur non trouvé sur la BDD !' }));
+//   })
 };
 
+// Afficher tous les users
+exports.getAllUser = (req, res, next) => {
+  // Utilisation de find() pour voir toutes les users
+  User.find()
+    .then((users) => { res.status(200).json(users) })
+    .catch((error) => { res.status(400).json({ error }) });
+};
 
-// // Afficher tous les users
-// exports.getAllUser = (req, res, next) => {
-//     // Utilisation de find() pour voir toutes les users
-//     User.find()
-//         .then((users) => { res.status(200).json(users) })
-//         .catch((error) => { res.status(400).json({ error }) });
-// };
+// get all employees
+// exports.getAllUser = (req, res)=> {
+//   //console.log('here all employees list');
+//   User.getAllUser((err, employees) =>{
+//       console.log('We are here');
+//       if(err)
+//       res.send(err);
+//       console.log('Employees', employees);
+//       res.send(employees)
+//   })
+// }
 
 // // Afficher un user
 // exports.getOneProfil = (req, res, next) => {
@@ -104,6 +119,21 @@ exports.login = (req, res, next) => {
 //         .then(() => res.status(201).json({ message: 'Nouvel User créé !' }))
 //         .catch(error => res.status(400).json({ error }));
 // };
+
+exports.createUser = (req, res) => {
+  const userData = new User(req.body);
+  console.log('userData', userData);
+  // check null
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res.send(400).send({ success: false, message: 'Please fill all fields' });
+  } else {
+    User.createUser(userData, (err, user) => {
+      if (err)
+        res.send(err);
+      res.json({ status: true, message: 'User Created Successfully', data: user.insertId })
+    })
+  }
+}
 
 // // Modifier un user
 // exports.modifyProfil = (req, res, next) => {

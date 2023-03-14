@@ -13,7 +13,7 @@ class User {
     this.imageUrl = imageUrl;
   }
   // Hasher le password avant de l'envoyer dans la BDD
-  hashPassword = async function () {
+  hashPassword = async() => {
     try {
       const hashPassword = bcrypt.hash(this.password, 10);
       return hashPassword;
@@ -21,6 +21,32 @@ class User {
       console.log(err);
     }
   };
+}
+
+// Afficher tous les users
+User.getAllUser = (result) =>{
+  mysqldb.query('SELECT * FROM user WHERE is_deleted=0', (err, res)=>{
+      if(err){
+          console.log('Erreur pour voir tous les users', err);
+          result(null,err);
+      }else{
+          console.log('Aperçu de tous les users');
+          result(null,res);
+      }
+  })
+}
+
+// create new user
+User.createUser  = (userData, result) =>{
+  mysqldb.query('INSERT INTO user SET ? ', (err, res)=>{
+      if(err){
+          console.log('Error while inserting data');
+          result(null, err);
+      }else{
+          console.log('Employee created successfully');
+          result(null, res)
+      }
+  })
 }
 
 module.exports = User;
