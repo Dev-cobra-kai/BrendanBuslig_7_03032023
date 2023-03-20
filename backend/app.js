@@ -39,8 +39,8 @@ app.use((req, res, next) => {
 });
 
 db.sequelize.sync({ force: false })
-.then(() => {console.log('Synchronisation terminée !')})
-.catch((error) => console.log("Quelque chose ne va pas ici !", error));
+  .then(() => { console.log('Synchronisation terminée !') })
+  .catch((error) => console.log("Synchronisation pas effectuée !", error));
 
 // Transformer le body en JSON avec bodu-parser
 app.use(bodyParser.json());

@@ -1,10 +1,12 @@
 // Importer des variables d'environnements
-const dotenv = require('dotenv');
-const result = dotenv.config()
-if (result.error) {
-   throw result.error
-}
-console.log(result.parsed)
+// const dotenv = require('dotenv');
+// const result = dotenv.config()
+// if (result.error) {
+//    throw result.error
+// }
+// console.log(result.parsed)
+
+require("dotenv").config();
 
 // Paramètres de connexion à la BDD MySql via Sequelize
 module.exports = {
