@@ -1,53 +1,52 @@
 // Models : Permet de créer des schémas de données qui contiennent les champs souhaités
 // pour indiquer leur type ainsi que leur caractère (obligatoire ou non)
-// Pour cela, on utilise la méthode Schema mise à disposition par Mongoose
 
-// Pour enregistrer un nouvel utilisateur
-class User {
-  constructor(userId, email, password, nom, prenom, imageUrl) {
-    this.userId = userId;
-    this.email = email;
-    this.password = password;
-    this.nom = nom;
-    this.prenom = prenom,
-    this.imageUrl = imageUrl;
-  }
-  // Hasher le password avant de l'envoyer dans la BDD
-  hashPassword = async() => {
-    try {
-      const hashPassword = bcrypt.hash(this.password, 10);
-      return hashPassword;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
+// Pour enregistrer un nouvel utilisateur (user) dans la BDD
+module.exports = (sequelize, Sequelize) => {
+  const User = sequelize.define("User", {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
 
-// Afficher tous les users
-User.getAllUser = (result) =>{
-  mysqldb.query('SELECT * FROM user WHERE is_deleted=0', (err, res)=>{
-      if(err){
-          console.log('Erreur pour voir tous les users', err);
-          result(null,err);
-      }else{
-          console.log('Aperçu de tous les users');
-          result(null,res);
-      }
-  })
-}
+    email: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+      unique: true,
+      validate: {
+        is: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+      },
+    },
 
-// create new user
-User.createUser  = (userData, result) =>{
-  mysqldb.query('INSERT INTO user SET ? ', (err, res)=>{
-      if(err){
-          console.log('Error while inserting data');
-          result(null, err);
-      }else{
-          console.log('Employee created successfully');
-          result(null, res)
-      }
-  })
-}
+    password: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+    },
 
-module.exports = User;
+    nom: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+    },
+
+    prenom: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+    },
+
+    admin: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+      default: false,
+    },
+
+    imageUrl: {
+      type: Sequelize.STRING(50),
+      allowNull: true,
+    },
+  });
+
+  return User;
+};
 

@@ -1,10 +1,29 @@
-class Post {
-    constructor(userId, comment, imageUrl, like ){
-      this.userId = userId,
-      this.comment = comment,
-      this.imageUrl = imageUrl,
-      this.like = like;
-    }
-  }
-  
-  module.exports = Post;
+// Pour enregistrer un nouvel utilisateur
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define("User", {
+    id: {
+      type: DataTypes.STRING(50),
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
+
+    message: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+
+    imageUrl: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+
+    link: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+  });
+
+  return User;
+};
+

@@ -1,8 +1,5 @@
-// Importer le package HTTP de node.js
-const http = require("http");
-
-// Importer l'application app.js
-const app = require("./app");
+const http = require("http"); // Importer le package HTTP de node.js
+const app = require("./app"); // Importer l'application app.js
 
 // Importer le package pour utiliser les variables d'environnements
 const dotenv = require('dotenv');

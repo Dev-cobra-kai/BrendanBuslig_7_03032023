@@ -8,12 +8,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 // Importer helmet (Permet de sécuriser vos applications Express en définissant divers en-têtes http)
 const helmet = require('helmet');
-
-// Importer connexion base de donnée MySql
-// const mysql = require("./db/mysql");
-
 // Importer les models de sequelize
-// const db = require("../models");
+const db = require("./models");
 
 // Importer la route user
 const userRoutes = require('./routes/user');
@@ -41,6 +37,10 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
+
+db.sequelize.sync({ force: false })
+.then(() => {console.log('Synchronisation terminée !')})
+.catch((error) => console.log("Quelque chose ne va pas ici !", error));
 
 // Transformer le body en JSON avec bodu-parser
 app.use(bodyParser.json());

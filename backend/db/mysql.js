@@ -2,28 +2,23 @@
 const dotenv = require('dotenv');
 const result = dotenv.config()
 if (result.error) {
-    throw result.error
+   throw result.error
 }
 console.log(result.parsed)
 
-// Importer mysql
-const mysql = require('mysql');
+// Paramètres de connexion à la BDD MySql via Sequelize
+module.exports = {
+   HOST: process.env.DB_HOST,
+   USER: process.env.DB_USER,
+   PASSWORD: process.env.DB_PASSWORD,
+   DB: process.env.DB_NAME,
+   dialect: "mysql",
+   pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+   }
+};
 
-// Se connecter à la base MySQL avec le module mysql
-// Les paramètres
-const mysqldb = mysql.createConnection({
-    host: 'localhost',    
-    user: 'root',
-    password: '',
-    database: 'groupomania',
-})
-// La connexion
-mysqldb.connect((err) => {
-    if (err) {
-        console.log(`Erreur de connexion à la base de donnée: ${err}`);
-    } else {
-        console.log("Connexion réussie à la base de donnée - groupomania");
-    }
-})
 
-module.exports = mysqldb;
