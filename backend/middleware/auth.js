@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const result = dotenv.config()
 if (result.error) {
-  throw result.error
+    throw result.error
 }
 console.log(result.parsed)
 
@@ -22,8 +22,7 @@ module.exports = (req, res, next) => {
         next();
     } catch {
         res.status(401).json({
-            error: new Error('Requête non authentifiée!')
+            error: "Authentification nécessaire !",
         });
     }
 };
-

@@ -1,26 +1,24 @@
 // Importer des variables d'environnements
-// const dotenv = require('dotenv');
-// const result = dotenv.config()
-// if (result.error) {
-//    throw result.error
-// }
-// console.log(result.parsed)
-
-require("dotenv").config();
+const dotenv = require('dotenv');
+const result = dotenv.config()
+if (result.error) {
+  throw result.error
+}
+console.log(result.parsed)
 
 // Paramètres de connexion à la BDD MySql via Sequelize
 module.exports = {
-   HOST: process.env.DB_HOST,
-   USER: process.env.DB_USER,
-   PASSWORD: process.env.DB_PASSWORD,
-   DB: process.env.DB_NAME,
-   dialect: "mysql",
-   pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-   }
+  HOST: process.env.DB_HOST,
+  USER: process.env.DB_USER,
+  PASSWORD: process.env.DB_PASSWORD,
+  DB: process.env.DB_NAME,
+  dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
 };
 
 

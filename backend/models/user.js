@@ -25,26 +25,26 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
 
-    // nom: {
-    //   type: Sequelize.STRING(50),
-    //   allowNull: false,
-    // },
+    nom: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+    },
 
-    // prenom: {
-    //   type: Sequelize.STRING(50),
-    //   allowNull: false,
-    // },
+    prenom: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+    },
 
-    // admin: {
-    //   type: Sequelize.STRING(50),
-    //   allowNull: false,
-    //   default: false,
-    // },
+    admin: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+      default: false,
+    },
 
-    // photo: {
-    //   type: Sequelize.STRING(50),
-    //   allowNull: true,
-    // },
+    photo: {
+      type: Sequelize.STRING(50),
+      allowNull: true,
+    },
   });
   return User;
 };
