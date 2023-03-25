@@ -5,48 +5,46 @@ const fs = require('fs');
 // Importer les models de sequelize
 const db = require('../models');
 
-// Afficher toutes les posts
-exports.getAllPost = (req, res, next) => {
+// Afficher toutes les commentaires
+exports.getAllComment = (req, res, next) => {
     // Utilisation de find() pour voir toutes les users
-    Post.findAll({
+    Comment.findAll({
         attributes: [
             // Le tableau correspond aux informations demandées à la BDD
             "id",
-            "message",
-            "imageURL",
-            "link",
+            "comment",
         ],
     })
-        .then((posts) => res.status(200).json(posts))
+        .then((comments) => res.status(200).json(comments))
 
         .catch((error) => res.status(500).json({ error }));
 };
 
-// Créer un nouveau post
-exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.post);
-    delete postObject._id;
-    const post = new Post({
-        ...postObject,
+// Créer un nouveau commentaire
+exports.createComment  = (req, res, next) => {
+    const commentObject = JSON.parse(req.body.comment);
+    delete commentObject._id;
+    const comment = new Comment({
+        ...commentObject,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 
     });
-    post.save()
-        .then(() => res.status(201).json({ message: 'Nouveau Post créé !' }))
+    comment.save()
+        .then(() => res.status(201).json({ message: 'Nouveau Commentaire créé !' }))
         .catch(error => res.status(400).json({ error }));
 };
 
-// Supprimer un post
-exports.deletePost = (req, res, next) => {
-    Post.findOne({ _id: req.params.id })
-        .then(post => {
-            if (post.userId != req.auth.userId) {
+// Supprimer un commentaire
+exports.deleteComment = (req, res, next) => {
+    Comment.findOne({ _id: req.params.id })
+        .then(comment => {
+            if (comment.userId != req.auth.userId) {
                 res.status(401).json({ message: 'Pas autorisé' });
             } else {
-                const filename = sauce.imageUrl.split('/images/')[1];
+                const filename = comment.imageUrl.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
-                    Post.deleteOne({ _id: req.params.id })
-                        .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+                    Comment.deleteOne({ _id: req.params.id })
+                        .then(() => res.status(200).json({ message: 'Commentaire supprimé !' }))
                         .catch(error => res.status(400).json({ error }));
                 });
             }

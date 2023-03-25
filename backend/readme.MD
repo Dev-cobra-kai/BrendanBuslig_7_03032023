@@ -48,23 +48,17 @@ http://localhost:3000/api/user/:id
 Params : KEY -> userId 
          VALUE -> _id user
 Authorization : Bearer Token -> Token : xxxxxxx
-Body : form-data
-KEY : profil
-VALUE :
-    {
-        "userId": "640616da951f56dfae00bed4",
-        "nom": "Dubois",
-        "prenom": "Martin",
-        "age": "40",
-        "imageUrl": "",
-        "__v": 0
-    }
-KEY : image + File
-VALUE : Select Files
+Body -> raw -> text = JSON
+{
+    "email": "test@test.fr",
+    "lastName": "Dupont",
+    "firstName": "Claude"
+}
 ## La route DELETE pour modifier l'user
 http://localhost:3000/api/user/:id
 Params : KEY -> userId 
          VALUE -> _id user
+Authorization : Bearer Token -> Token : xxxxxxx
 ## La route POST pour like et dislike
 http://localhost:3000/api/user/:id/like
 Authorization : Bearer Token -> Token : xxxxxxx

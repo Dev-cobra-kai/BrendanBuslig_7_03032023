@@ -2,13 +2,6 @@
 
 // Importer JsonWebToken
 const jwt = require('jsonwebtoken');
-//Importer des variables d'environnements
-const dotenv = require('dotenv');
-const result = dotenv.config()
-if (result.error) {
-    throw result.error
-}
-console.log(result.parsed)
 
 // Utilisateur authentifié = routes sécurisées
 module.exports = (req, res, next) => {
@@ -26,3 +19,4 @@ module.exports = (req, res, next) => {
         });
     }
 };
+

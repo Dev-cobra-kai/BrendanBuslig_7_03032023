@@ -14,7 +14,7 @@ const db = require("./models");
 // Importer la route user
 const userRoutes = require('./routes/user');
 // Importer la route post
-// const postRoutes = require('./routes/post');
+const postRoutes = require('./routes/post');
 
 // Créer une application Express
 const app = express();
@@ -38,6 +38,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Mise à jour de la BDD
 db.sequelize.sync({ force: false })
   .then(() => { console.log('Synchronisation terminée !') })
   .catch((error) => console.log("Synchronisation pas effectuée !", error));
@@ -49,9 +50,9 @@ app.use(bodyParser.json());
 // app.use(express.json());
 
 // La route de l'authentification
-app.use('/api/auth', userRoutes);
+app.use('/api/users', userRoutes);
 // La route du post
-// app.use('/api/post', postRoutes);
+app.use('/api/posts', postRoutes);
 // Acceder aux images du dossier images
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

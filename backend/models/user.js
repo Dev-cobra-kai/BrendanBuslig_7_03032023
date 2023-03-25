@@ -12,40 +12,40 @@ module.exports = (sequelize, Sequelize) => {
     },
 
     email: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        is: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+        is: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, // Utilisation d'un regex pour le format d'adresse mail
       },
     },
 
     password: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING,
       allowNull: false,
     },
 
-    nom: {
-      type: Sequelize.STRING(50),
+    lastName: {
+      type: Sequelize.STRING(40),
       allowNull: false,
     },
 
-    prenom: {
-      type: Sequelize.STRING(50),
+    firstName: {
+      type: Sequelize.STRING(40),
       allowNull: false,
     },
 
     admin: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.BOOLEAN,
       allowNull: false,
       default: false,
     },
 
-    photo: {
-      type: Sequelize.STRING(50),
+    picture: {
+      type: Sequelize.STRING,
       allowNull: true,
     },
   });
+
   return User;
 };
-

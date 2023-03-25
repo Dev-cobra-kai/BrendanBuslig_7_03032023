@@ -1,29 +1,28 @@
 // Pour enregistrer un nouvel utilisateur
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define("User", {
+module.exports = (sequelize, Sequelize) => {
+  const Post = sequelize.define("Post", {
     id: {
-      type: DataTypes.STRING(50),
+      type: Sequelize.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,
     },
 
     message: {
-      type: DataTypes.STRING(50),
+      type: Sequelize.TEXT,
       allowNull: false,
     },
 
-    imageUrl: {
-      type: DataTypes.STRING(50),
+    imageURL: {
+      type: Sequelize.STRING,
       allowNull: true,
     },
 
     link: {
-      type: DataTypes.STRING(50),
+      type: Sequelize.STRING,
       allowNull: true,
     },
   });
 
-  return User;
+  return Post;
 };
-
