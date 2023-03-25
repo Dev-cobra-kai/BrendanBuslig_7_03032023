@@ -8,8 +8,8 @@ const multer = require('../middleware/multer-config');
 
 // Importer controllers/post.js
 const postCtrl = require('../controllers/post');
-// const commentCtrl = require('../controllers/comment');
-// const likeCtrl = require('../controllers/like');
+const commentCtrl = require('../controllers/comment');
+const likeCtrl = require('../controllers/like');
 
 // Les routes pour les posts
 router.post('/', auth, multer, postCtrl.createPost);
@@ -19,15 +19,12 @@ router.put('/:id', auth, multer, postCtrl.modifyPost);
 router.delete('/:id', auth, multer, postCtrl.deletePost);
 
 // Les routes pour les commentaires
-// router.get('/', auth, commentCtrl.getAllComment);
-// router.post('/', auth, commentCtrl.createComment);
-// router.put('/:id', auth, multer, postCtrl.modifyComment);
-// router.delete('/:id', auth, commentCtrl.deleteComment);
+router.post('/:postId/comments', auth, commentCtrl.createComment);
+router.get('/:postId/comments', auth, commentCtrl.getAllComment);
+router.delete('/comments/:id', auth, commentCtrl.deleteComment);
 
 // Les routes pour les likes
-// router.get('/:id/like/:id', auth, likeCtrl.getLike);
-// router.post('/:id/like', auth, likeCtrl.Createlike);
-// router.put('/:id/like/:id', auth, likeCtrl.modifyLike);
+router.post("/:postId/likes", auth, likeCtrl.addLike);
 
 // Exporter le module
 module.exports = router;

@@ -5,7 +5,6 @@ const fs = require('fs');
 // Importer les models de sequelize
 const db = require('../models');
 
-
 // Créer un post
 exports.createPost = (req, res, next) => {
   // const token = req.headers.authorization.split(" ")[1];

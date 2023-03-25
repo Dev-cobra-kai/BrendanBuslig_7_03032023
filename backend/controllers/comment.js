@@ -5,6 +5,29 @@ const fs = require('fs');
 // Importer les models de sequelize
 const db = require('../models');
 
+// Créer un nouveau commentaire
+exports.createComment = (req, res, next) => {
+    // Nous avons besoin de récupérer l'userId par l'intermédiaire du token
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+    const userId = decodedToken.userId;
+  
+    db.Post.findOne({
+      where: {
+        id: req.params.id || null,
+        UserID: userId,
+      },
+    });
+    db.Comment.create({
+      comment: req.body.comment,
+      PostId: req.params.postId,
+      UserId: userId,
+    })
+      .then(() => res.status(201).json({ message: "Commentaire ajouté !" }))
+  
+      .catch((error) => res.status(400).json({ error }));
+  };
+
 // Afficher toutes les commentaires
 exports.getAllComment = (req, res, next) => {
     // Utilisation de find() pour voir toutes les users
@@ -18,20 +41,6 @@ exports.getAllComment = (req, res, next) => {
         .then((comments) => res.status(200).json(comments))
 
         .catch((error) => res.status(500).json({ error }));
-};
-
-// Créer un nouveau commentaire
-exports.createComment  = (req, res, next) => {
-    const commentObject = JSON.parse(req.body.comment);
-    delete commentObject._id;
-    const comment = new Comment({
-        ...commentObject,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-
-    });
-    comment.save()
-        .then(() => res.status(201).json({ message: 'Nouveau Commentaire créé !' }))
-        .catch(error => res.status(400).json({ error }));
 };
 
 // Supprimer un commentaire
@@ -51,3 +60,4 @@ exports.deleteComment = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+
