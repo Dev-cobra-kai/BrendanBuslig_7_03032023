@@ -22,7 +22,7 @@ const normalizePort = val => {
 };
 
 // Paramètrage du port avec la méthode set de Express
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '4000');
 app.set('port', port);
 
 const errorHandler = error => {
