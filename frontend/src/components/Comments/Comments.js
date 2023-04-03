@@ -27,7 +27,7 @@ class Comments extends React.Component {
         let token = "Bearer " +  userConnect.token;
 
         const postId = this.props.match.params.id;
-        fetch("http://localhost:8080/api/posts/" + postId + "/comments/" ,
+        fetch("http://localhost:4000/api/posts/" + postId + "/comments/" ,
             {headers: 
                 {"Authorization" : token},
             })
@@ -42,7 +42,7 @@ class Comments extends React.Component {
             }
         )
 
-        fetch("http://localhost:8080/api/users/", 
+        fetch("http://localhost:4000/api/users/", 
             {headers: 
                 {"Authorization" : token}
             })
@@ -89,7 +89,7 @@ class Comments extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:8080/api/comments/'), requestOptions)
+        fetch(('http://localhost:4000/api/comments/'), requestOptions)
                 .then(response => response.json())
                 .then((result) => 
                     this.setState({comments: result}),
@@ -130,7 +130,7 @@ class Comments extends React.Component {
                         <div className="form-comment" key={"divimg" + comment.id}>
                             {users.map((user) => {
                                 if (user.id === comment.userId && user.imageUrl) {
-                                return <img src={"http://localhost:8080/images/" + user.imageUrl} alt="user" key={"userImage" + comment.id} />
+                                return <img src={"http://localhost:4000/images/" + user.imageUrl} alt="user" key={"userImage" + comment.id} />
                                 } else if (user.id === comment.userId && !user.imageUrl) {
                                     return <img src={img} alt="user" key={"userImage" + comment.id} />
                                 } else {

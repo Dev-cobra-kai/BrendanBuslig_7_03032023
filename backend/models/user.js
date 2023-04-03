@@ -25,12 +25,12 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
 
-    lastName: {
+    lastname: {
       type: Sequelize.STRING(40),
       allowNull: false,
     },
 
-    firstName: {
+    firstname: {
       type: Sequelize.STRING(40),
       allowNull: false,
     },

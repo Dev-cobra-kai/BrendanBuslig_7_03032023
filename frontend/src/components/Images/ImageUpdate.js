@@ -28,7 +28,7 @@ class ImageUpdate extends React.Component {
         const userId = storage.userId;
         let token = "Bearer " + storage.token;
 
-        fetch("http://localhost:8080/api/users/" + userId,
+        fetch("http://localhost:4000/api/users/" + userId,
             {
                 method: 'put',
                 headers: { "Authorization": token },

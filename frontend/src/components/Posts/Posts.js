@@ -14,7 +14,7 @@ const Posts = () => {
     let token = "Bearer " + storage.token;
 
     useEffect(() => {
-      fetch("http://localhost:8080/api/posts", 
+      fetch("http://localhost:4000/api/posts", 
         {headers: 
             {"Authorization" : token}
         })
@@ -32,7 +32,7 @@ const Posts = () => {
     }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/users/", 
+        fetch("http://localhost:4000/api/users/", 
             {headers: 
                 {"Authorization" : token}
             })
@@ -65,7 +65,7 @@ const Posts = () => {
                         <div className="post-card" key={"postCard" + post.id}>
                             {users.map((user) => {
                                     if (user.id === post.userId && user.imageUrl) {
-                                    return <img src={"http://localhost:8080/images/" + user.imageUrl} alt="user" key={"userImage" + post.id} />
+                                    return <img src={"http://localhost:4000/images/" + user.imageUrl} alt="user" key={"userImage" + post.id} />
                                     } else if (user.id === post.userId && !user.imageUrl) {
                                         return <img src={img} alt="user" key={"userImage" + post.id} />
                                     } else {

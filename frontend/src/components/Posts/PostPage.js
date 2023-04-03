@@ -22,7 +22,7 @@ function PostPage ({ match }) {
     let postId = match.params.id;
 
     useEffect(() => {
-      fetch("http://localhost:8080/api/posts/" + postId, 
+      fetch("http://localhost:4000/api/posts/" + postId, 
         {headers: 
             {"Authorization" : token}
         })
@@ -41,7 +41,7 @@ function PostPage ({ match }) {
     }, [postId, token])
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/users/", 
+        fetch("http://localhost:4000/api/users/", 
             {headers: 
                 {"Authorization" : token}
             })
@@ -59,7 +59,7 @@ function PostPage ({ match }) {
         }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/posts/" + postId + "/likes/" ,
+        fetch("http://localhost:4000/api/posts/" + postId + "/likes/" ,
             {headers: 
                 {"Authorization" : token},
             })
@@ -77,7 +77,7 @@ function PostPage ({ match }) {
         }, [postId, token])
 
     function LikeSubmit () {
-        fetch('http://localhost:8080/api/likes/', {
+        fetch('http://localhost:4000/api/likes/', {
             method: 'post',
             headers: { 
                 'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ function PostPage ({ match }) {
                 <div className="post-present">
                     {users.map((user) => {
                         if (user.id === post.userId && user.imageUrl) {
-                        return <img src={"http://localhost:8080/images/" + user.imageUrl} alt="user" key={"userImage" + post.id} />
+                        return <img src={"http://localhost:4000/images/" + user.imageUrl} alt="user" key={"userImage" + post.id} />
                         } else if (user.id === post.userId && !user.imageUrl) {
                             return <img src={img} alt="user" key={"userImage" + post.id} />
                         } else {

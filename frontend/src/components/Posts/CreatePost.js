@@ -46,7 +46,7 @@ class CreatePost extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:8080/api/posts/'), requestOptions)
+        fetch(('http://localhost:4000/api/posts/'), requestOptions)
                 .then(response => response.json())
                 .then(
                     (response) => {

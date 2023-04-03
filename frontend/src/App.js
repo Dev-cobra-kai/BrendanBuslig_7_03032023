@@ -6,8 +6,6 @@ import Routes from './components/Routes/Routes';
 import AuthApi from './components/Auth/AuthApi';
 // import img from './images/icon.png';
 
-//import ComponentRandom from './components/ComponentRandom'; 
-
 //import CSS & bootsrapreact
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from "react-bootstrap/Nav"; 

@@ -51,7 +51,7 @@ function Login() {
 
     const handleSubmit = useCallback(function (value) {
 
-        fetch("http://localhost:8080/api/auth/login/", {
+        fetch("http://localhost:4000/api/users/login/", {
             method: "post",
             headers: { "Content-type": 'application/json' },
             body: JSON.stringify({

@@ -34,7 +34,7 @@ class DeletePost extends React.Component {
         let postPage = JSON.parse(localStorage.getItem('postPage'));
         let postId = postPage.id
 
-        fetch(('http://localhost:8080/api/posts/' + postId), requestOptions)
+        fetch(('http://localhost:4000/api/posts/' + postId), requestOptions)
                 .then(response => response.json())
                 .then(
                     (response) => {

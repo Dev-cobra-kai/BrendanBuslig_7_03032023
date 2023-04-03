@@ -14,7 +14,7 @@ function DeleteAccount () {
     const handleSubmit = useCallback(function (value) {
 
 
-        fetch(('http://localhost:8080/api/users/' + userId), {
+        fetch(('http://localhost:4000/api/users/' + userId), {
             method: "delete",
             headers: 
                 { "Content-type" : 'application/json',

@@ -18,8 +18,8 @@ exports.signup = (req, res, next) => {
       db.User.create({
         email: req.body.email,
         password: hash,       
-        lastName: req.body.lastName,
-        firstName: req.body.firstName,
+        lastname: req.body.lastname,
+        firstname: req.body.firstname,
         isAdmin: false,
       })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))        
