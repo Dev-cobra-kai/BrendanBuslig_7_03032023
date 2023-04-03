@@ -1,18 +1,65 @@
-import React from "react"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Profil from "./pages/Profil/Profil";
-import Auth from "./pages/Auth/AUth";
+//imports
+import React from 'react';
+import {BrowserRouter as Router, Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import Routes from './components/Routes/Routes';
+import AuthApi from './components/Auth/AuthApi';
+// import img from './images/icon.png';
 
+//import ComponentRandom from './components/ComponentRandom'; 
+
+//import CSS & bootsrapreact
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from "react-bootstrap/Nav"; 
+// import './App.css';
+
+// Composant App
 function App() {
+  const [auth, setAuth] = React.useState(false);
+
+  // gestion des cookies
+  const readCookie = () => {
+    const user = Cookies.get("user");
+    if(user) {
+      setAuth(true);
+    }
+  }
+
+  React.useEffect(() => {
+    readCookie();
+  }, [])
+
+  // Gestion de la NavBar
+  let navLink;
+  if (auth === true) {
+      const userLog = JSON.parse(localStorage.getItem('userConnect'));
+      const userId = userLog.userId;
+
+      navLink = <>
+              <Nav className="mr-auto">
+                  <Link to="/posts" className="nav-link">Tous les posts</Link>
+                  <Link to={"/user/" + userId } className="nav-link">Mon compte</Link>
+              </Nav>
+            </>
+  } else {
+      navLink = <Nav className="mr-auto">
+              <Link to="/signup" className="nav-link">S'inscrire</Link>
+              <Link to="/login" className="nav-link">Se connecter</Link>
+          </Nav>
+  }
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profil" element={<Profil />} />
-        <Route path="/auth" element={<Auth />} />
-      </Routes>
-    </Router>
+    <React.Fragment>
+      <AuthApi.Provider value={{auth, setAuth}}>
+        <Router>
+          <Navbar sticky="top" bg="dark" variant="dark">
+              {/* <Link to="/" className="logo"><img src={img} alt="logo" /></Link> */}
+              {navLink}
+          </Navbar>
+          <Routes />
+        </Router>
+      </AuthApi.Provider>
+    </React.Fragment>
   );
 }
 

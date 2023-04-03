@@ -43,8 +43,10 @@ exports.login = (req, res, next) => {
           res.status(200).json({            
             // Encodage du userId
             userId: user._id,
+            userAdmin: user.isAdmin,
             token: jwt.sign(
-                { userId: user._id },
+                {  userId: user.id, 
+                  isAdmin : user.isAdmin  },
                 'RANDOM_TOKEN_SECRET',
                 { expiresIn: '24h' }
             ),

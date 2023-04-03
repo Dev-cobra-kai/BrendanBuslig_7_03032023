@@ -1,43 +1,52 @@
-const db = require("../models"); // Récupération des modèles Sequelize
-const jwt = require("jsonwebtoken"); // Jwt necessaire pour la gestion d'un token
+const db = require("../models");
+const Like = db.likes;
 
-// Ajouter un like et suppression de ce dernier si il est déjà présent 
-exports.addLike = async (req, res, next) => {
-  try {
-    // Nous avons besoin de récupérer l'userId par l'intermédiaire du token, à defaut du store frontend
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
-    const userId = decodedToken.userId;
-
-    const userLike = await db.Like.findOne({
-      // On vérifie si un like est déjà présent
-      where: {
-        UserId: userId,
-        PostId: req.params.postId,
-      },
-    });
-
-    if (userLike) {
-      // Si oui on le supprime de la BDD
-      await db.Like.destroy(
-        {
-          where: {
-            UserId: userId,
-            PostId: req.params.postId,
-          },
-        },
-        { truncate: true }
-      );
-      res.status(200).json({ message: "Post disliké" });
-    } else {
-      // Sinon le rajoute
-      db.Like.create({
-        UserId: userId,
-        PostId: req.params.postId,
-      });
-      res.status(201).json({ messageRetour: "Post liké" });
-    }
-  } catch (error) {
-    return res.status(500).send({ error });
-  }
+// Lire tous les likes
+exports.findAllLike = (req, res, next) => {
+  Like.findAll({where: {
+    postId: req.params.id}})
+    .then(likes => {
+        console.log(likes);
+        res.status(200).json({data: likes});
+    })
+    .catch(error => res.status(400).json({ error }));
 };
+
+// Créer un like
+exports.createLike = (req, res, next) => {
+  const likeObject = req.body;
+    Like.findAll({where: {
+      postId: req.body.postId,
+      userId: req.body.userId
+      }})
+      .then(likes => {
+        if(likes.length === 0) {
+          const like = new Like({
+            ...likeObject
+          });
+          // Enregistrement de l'objet like dans la base de données
+          like.save()
+          .then(() => {
+            Like.findAll({
+              where: {postId: req.body.postId}
+            }).then(likes => {
+              res.status(200).json({ like: likes.length});
+            })
+          })
+          .catch(error => res.status(400).json({ error }));
+        } else {
+          Like.destroy({ where: {
+            postId: req.body.postId,
+            userId: req.body.userId }})
+            .then(() => {
+              Like.findAll({
+                where: {postId: req.body.postId}
+              }).then(likes => {
+                res.status(200).json({ like: likes.length});
+              })
+            })
+            .catch(error => res.status(400).json({ error }));
+        }
+      }
+    )
+}
