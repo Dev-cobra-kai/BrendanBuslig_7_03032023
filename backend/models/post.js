@@ -8,20 +8,39 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
     },
 
-    message: {
-      type: Sequelize.TEXT,
+    userId: {
       allowNull: false,
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id'
+      }
     },
 
-    imageURL: {
-      type: Sequelize.STRING,
-      allowNull: true,
+    title: {
+      allowNull: false,
+      type: Sequelize.STRING
     },
 
-    link: {
-      type: Sequelize.STRING,
-      allowNull: true,
+    content: {
+      allowNull: false,
+      type: Sequelize.TEXT
     },
+
+    postUrl: {
+      allowNull: true,
+      type: Sequelize.STRING
+    },
+
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    }
   });
 
   return Post;

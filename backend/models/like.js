@@ -1,11 +1,45 @@
 module.exports = (sequelize, Sequelize) => {
     const Like = sequelize.define("Like", {
       id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
       },
+
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
+      },
+
+      postId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Posts',
+          key: 'id'
+        }
+      },
+
+      like: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
   
     return Like;

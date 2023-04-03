@@ -90,13 +90,13 @@ class Signup extends React.Component {
                 body: JSON.stringify(this.state)
             };
     
-            fetch('http://localhost:8080/api/users/auth/signup/', requestOptions)
+            fetch('http://localhost:4000/api/users/signup/', requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 
                         alert("Erreur : " + response.error); 
                     } else { 
-                        this.setState({ redirection: true })
+                        this.setState({ navigation: true })
                         alert("Votre compte à bien été créé ! Connectez-vous pour accéder aux derniers échanges.")
                     }
                 })
@@ -112,8 +112,8 @@ class Signup extends React.Component {
     }
 
     render() {
-        const { Navigation } = this.state;
-        if (Navigation) {
+        const { navigation } = this.state;
+        if (navigation) {
             return <Navigate to='/login'/>;
         }
 

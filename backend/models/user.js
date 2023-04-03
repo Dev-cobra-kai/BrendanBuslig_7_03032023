@@ -35,16 +35,26 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
 
-    admin: {
+    isAdmin: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       default: false,
     },
 
-    picture: {
+    imageUrl: {
       type: Sequelize.STRING,
       allowNull: true,
     },
+
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    }
   });
 
   return User;

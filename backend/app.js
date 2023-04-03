@@ -15,6 +15,10 @@ const db = require("./models");
 const userRoutes = require('./routes/user');
 // Importer la route post
 const postRoutes = require('./routes/post');
+// Importer la route like
+const likeRoutes = require('./routes/like');
+// Importer la route comment
+const commentRoutes = require('./routes/comment');
 
 // Créer une application Express
 const app = express();
@@ -53,6 +57,10 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 // La route du post
 app.use('/api/posts', postRoutes);
+// La route du like
+app.use('/api/likes', likeRoutes);
+// La route du comment
+app.use('/api/comments', commentRoutes);
 // Acceder aux images du dossier images
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

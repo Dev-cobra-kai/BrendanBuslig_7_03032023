@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
         password: hash,       
         lastName: req.body.lastName,
         firstName: req.body.firstName,
-        admin: false,
+        isAdmin: false,
       })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))        
         .catch((error) => res.status(400).json({ error: 'Erreur côté client' }));
