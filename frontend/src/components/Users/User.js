@@ -1,56 +1,121 @@
-import React, { useState, useCallback} from 'react';
-import { Navigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Moment from 'react-moment';
+import img from '../../images/icon.png';
+import AuthApi from '../Auth/AuthApi';
+import Cookies from 'js-cookie';
 
-function DeleteUserAccount ({ match }) {
-    const [navigate, setNavigate] = useState(false);
+const User = () => {
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [user, setUser] = useState([]);
+    const [posts, setPost] = useState([]);
+    const navigate = useNavigate();
+
     const storage = JSON.parse(localStorage.getItem('userConnect'));
-    let token = "Bearer " +  storage.token;
-    let userId = match.params.id;
+    const userId = storage.userId;
+    let token = "Bearer " + storage.token;
 
-    const handleSubmit = useCallback(function (value) {
-
-        fetch(('http://localhost:4000/api/users/' + userId), {
-            method: "delete",
-            headers: 
-                { "Content-type" : 'application/json',
-                'Authorization': token
-                },
-            body: JSON.stringify({
-                id: value.id,
-                userId: storage.userId,
-                isAdmin: storage.userAdmin
+    useEffect(() => {
+        fetch("http://localhost:4000/api/users/" + userId,
+            {
+                headers:
+                    { "Authorization": token }
             })
-        })
-        .then(res => res.json())
-        .then(
-            (res) => {
-                if (res.error) { 
-                    alert("Ce compte n'a pas pu être supprimé."); 
-                } else { 
-                    alert("Compte supprimé !"); 
-                    setNavigate(true);
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setUser(result);
+                    localStorage.setItem('userAccount', JSON.stringify(result));
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
                 }
-            }
-        )
-        .catch(error => {
-            this.setState({ Erreur: error.toString() });
-            alert("Ce compte n'a pas pu être supprimé !");
-            console.error('Il y a eu une erreur !', error);
-        })
-    }, [userId, storage.userAdmin, storage.userId, token])
+            )
+    }, [userId, token])
+
+    useEffect(() => {
+        fetch("http://localhost:4000/api/users/" + userId + "/posts/",
+            {
+                headers:
+                    { "Authorization": token },
+            })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setPost(result.data);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    }, [userId, token])
+
+    const Auth = React.useContext(AuthApi);
+
+    const handleOnclick = () => {
+        Auth.setAuth(false);
+        Cookies.remove("user");
+        localStorage.clear();
+    }
+
+    let idUser;
+    if (error) {
+        return <div>Erreur : {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Chargement...</div>;
+    } else if (user.id === userId || user.isAdmin === true) {
+        idUser = <div className="user-button">
+            <button className="btn btn-outline-info btn-sm" onClick={() => { navigate.push("/userupdate/" + userId) }}>Modifier</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate.push("/userdelete/" + userId) }}>Supprimer</button>
+            <button className="btn btn-outline-dark btn-sm" onClick={handleOnclick}>Déconnecter</button>
+        </div>
+    }
 
     return (
         <React.Fragment>
-            {navigate ? <Navigate to="/posts/" /> : null}
             <div className="container">
-                <h1>Souhaitez vous vraiment supprimer ce compte ?</h1>
-                <div className="form-submit">
-                    <Link to={'/user/' + userId} className="btn btn-outline-info btn-sm">Retour au compte utilisateur</Link>
-                    <button className="btn btn-outline-danger btn-sm" onClick={handleSubmit}>Supprimer ce compte</button>
+                <h1>Bienvenue {user.firstname} !</h1>
+                {storage.userAdmin === true ?
+                    <p>Compte Administrateur</p> : <></>}
+                <div className="user-page">
+                    <div className="images">
+                        {user.imageUrl ?
+                            <img
+                                src={"http://localhost:4000/images/" + user.imageUrl}
+                                alt="user"
+                                key={"userImage" + user.id}
+                            /> :
+                            <img
+                                src={img}
+                                alt="user"
+                                key={"userImage" + user.id}
+                            />
+                        }
+                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate.push("/imageupdate/" + userId) }}>Modifier</button>
+                    </div>
+                    <div className="show-post">
+                        <h2>{user.firstname} {user.lastname}</h2>
+                    </div>
+                    {idUser}
+                </div>
+                <div className="user-post">
+                    <h2>Vos posts</h2>
+                    {posts.map((post) => (
+                        <div className="user-post" key={"user" + post.id}>
+                            <Link to={"/post/" + post.id} key={"post" + post.id} className="nav-link">{post.title}</Link>
+                            <p key={"post" + post.id}>{post.content}</p>
+                            <h3 key={"date" + post.id}>Publié le <Moment key={"date" + post.id} format="DD MMM YYYY" date={post.createdAt} /></h3>
+                        </div>
+                    ))}
                 </div>
             </div>
         </React.Fragment>
     );
-}
+};
 
-export default DeleteUserAccount;
+export default User;

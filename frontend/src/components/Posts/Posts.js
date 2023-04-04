@@ -14,27 +14,29 @@ const Posts = () => {
     let token = "Bearer " + storage.token;
 
     useEffect(() => {
-      fetch("http://localhost:4000/api/posts", 
-        {headers: 
-            {"Authorization" : token}
-        })
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setIsLoaded(true);
-                setPosts(result.data);
-            },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
-        )
+        fetch("http://localhost:4000/api/posts",
+            {
+                headers:
+                    { "Authorization": token }
+            })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setPosts(result.data);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
     }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/users/", 
-            {headers: 
-                {"Authorization" : token}
+        fetch("http://localhost:4000/api/users/",
+            {
+                headers:
+                    { "Authorization": token }
             })
             .then(res => res.json())
             .then(
@@ -47,7 +49,7 @@ const Posts = () => {
                     setError(error);
                 }
             )
-        }, [token])
+    }, [token])
 
     if (error) {
         return <div>Erreur : {error.message}</div>;
@@ -55,27 +57,27 @@ const Posts = () => {
         return <div>Chargement...</div>;
     } else {
         return (
-            <React.Fragment>   
+            <React.Fragment>
                 <div className="container">
                     <h1>Tous les posts publiés</h1>
                     <div className="form-submit">
-                        <button className="btn btn-outline-info btn-sm" onClick={() => {navigate.push("/createpost/")}}>Publier un post</button>
+                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate.push("/createpost/") }}>Publier un post</button>
                     </div>
                     {posts.map((post) => (
                         <div className="post-card" key={"postCard" + post.id}>
                             {users.map((user) => {
-                                    if (user.id === post.userId && user.imageUrl) {
+                                if (user.id === post.userId && user.imageUrl) {
                                     return <img src={"http://localhost:4000/images/" + user.imageUrl} alt="user" key={"userImage" + post.id} />
-                                    } else if (user.id === post.userId && !user.imageUrl) {
-                                        return <img src={img} alt="user" key={"userImage" + post.id} />
-                                    } else {
-                                        return null
-                                    }
+                                } else if (user.id === post.userId && !user.imageUrl) {
+                                    return <img src={img} alt="user" key={"userImage" + post.id} />
+                                } else {
+                                    return null
+                                }
                             })}
-                            <div className= "show-post" key={"show" + post.id}>
+                            <div className="show-post" key={"show" + post.id}>
                                 {users.map((user) => {
-                                    if(user.id === post.userId){
-                                        return <h2 key={"h2" +user.id}>Publié par <Link to={"/users/" + user.id} key={user.id + post.id}className="nav-link">{user.firstname} {user.lastname}</Link></h2>
+                                    if (user.id === post.userId) {
+                                        return <h2 key={"h2" + user.id}>Publié par <Link to={"/users/" + user.id} key={user.id + post.id} className="nav-link">{user.firstname} {user.lastname}</Link></h2>
                                     } else {
                                         return null
                                     }
@@ -89,7 +91,7 @@ const Posts = () => {
                 </div>
             </React.Fragment>
         );
-    } 
+    }
 };
 
 export default Posts;

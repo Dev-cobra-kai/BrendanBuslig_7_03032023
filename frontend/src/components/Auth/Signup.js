@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 class Signup extends React.Component {
 
-    state = { navigate : false }
+    state = { navigate: false }
     // navigate(to, { state={}, replace=false })
 
     constructor(props) {
@@ -97,7 +97,7 @@ class Signup extends React.Component {
                     if (response.error) {
                         alert("Erreur : " + response.error);
                     } else {
-                        this.setState({ navigate : true })
+                        this.setState({ navigate: true })
                         alert("Votre compte à bien été créé ! Connectez-vous pour accéder aux derniers échanges.")
                     }
                 })

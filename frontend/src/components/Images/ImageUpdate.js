@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 class ImageUpdate extends React.Component {
 
-    state = { navigation: false }
+    state = { navigate: false }
     constructor(props) {
         const storage = JSON.parse(localStorage.getItem('userConnect'));
 

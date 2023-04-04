@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Navigate, Link} from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 class DeletePost extends React.Component {
-    state = { navigation: false };
+    state = { navigate: false };
 
-    constructor (props) {
+    constructor(props) {
         super(props)
         const userConnect = JSON.parse(localStorage.getItem('userConnect'));
-        
+
         this.state = {
             userId: userConnect.userId,
             isAdmin: userConnect.userAdmin
@@ -16,17 +16,17 @@ class DeletePost extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit (e) {
+    handleSubmit(e) {
         e.preventDefault()
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
-        let token = "Bearer " +  storage.token;
-      
+        let token = "Bearer " + storage.token;
+
         const requestOptions = {
             method: 'delete',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token 
+                'Authorization': token
             },
             body: JSON.stringify(this.state)
         };
@@ -35,29 +35,29 @@ class DeletePost extends React.Component {
         let postId = postPage.id
 
         fetch(('http://localhost:4000/api/posts/' + postId), requestOptions)
-                .then(response => response.json())
-                .then(
-                    (response) => {
-                        if (response.error) { 
-                            this.setState({ navigation: true })
-                            alert("Votre post n'a pas pu être supprimé."); 
-                        } else { 
-                            this.setState({ navigation: true })
-                            alert("Votre post à bien été supprimé !");
-                            
-                        }
+            .then(response => response.json())
+            .then(
+                (response) => {
+                    if (response.error) {
+                        this.setState({ navigate: true })
+                        alert("Votre post n'a pas pu être supprimé.");
+                    } else {
+                        this.setState({ navigate: true })
+                        alert("Votre post à bien été supprimé !");
+
                     }
-                )
-                .catch(error => {
-                    this.setState({ Erreur: error.toString() });
-                    console.error('Il y a eu une erreur !', error);
                 }
+            )
+            .catch(error => {
+                this.setState({ Erreur: error.toString() });
+                console.error('Il y a eu une erreur !', error);
+            }
             );
     }
 
-    render () {
-        const { navigation } = this.state;
-        if (navigation) {
+    render() {
+        const { navigate } = this.state;
+        if (navigate) {
             return <Navigate to='/posts' />;
         }
 

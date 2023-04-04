@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Navigate, Link} from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Field from '../Form/Field';
 import Form from 'react-bootstrap/Form'
 
 class CreatePost extends React.Component {
 
-    state = { navigation: false };
+    state = { navigate: false };
 
-    constructor (props) {
+    constructor(props) {
         super(props)
 
         const userConnect = JSON.parse(localStorage.getItem('userConnect'));
@@ -23,23 +23,23 @@ class CreatePost extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange (e) {
+    handleChange(e) {
         const name = e.target.name;
-        const value =  e.target.value;
+        const value = e.target.value;
         this.setState({
             [name]: value
         })
     }
 
-    handleSubmit (e) {
+    handleSubmit(e) {
         e.preventDefault()
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
-        let token = "Bearer " +  storage.token;
+        let token = "Bearer " + storage.token;
 
         const requestOptions = {
             method: 'post',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': token
             },
@@ -47,25 +47,25 @@ class CreatePost extends React.Component {
         };
 
         fetch(('http://localhost:4000/api/posts/'), requestOptions)
-                .then(response => response.json())
-                .then(
-                    (response) => {
-                    if (response.error) { 
-                        alert("Votre post n'a pas pu être publié : " + response.error); 
-                    } else { 
-                        this.setState({ navigation: true })
+            .then(response => response.json())
+            .then(
+                (response) => {
+                    if (response.error) {
+                        alert("Votre post n'a pas pu être publié : " + response.error);
+                    } else {
+                        this.setState({ navigate: true })
                         alert("Votre post à bien été publié !")
                     }
                 })
-                .catch(error => {
-                    this.setState({ Erreur: error.toString() });
-                    console.error('Il y a eu une erreur !', error);
+            .catch(error => {
+                this.setState({ Erreur: error.toString() });
+                console.error('Il y a eu une erreur !', error);
             });
     }
 
     render() {
-        const { navigation } = this.state;
-        if (navigation) {
+        const { navigate } = this.state;
+        if (navigate) {
             return <Navigate to='/posts' />;
         }
 

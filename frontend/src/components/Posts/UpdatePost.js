@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Navigate, Link} from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Field from '../Form/Field';
 import Form from 'react-bootstrap/Form'
 
 class UpdatePost extends React.Component {
 
-    state = { navigation: false };
+    state = { navigate: false };
 
-    constructor (props) {
+    constructor(props) {
         super(props)
         const postPage = JSON.parse(localStorage.getItem('postPage'));
         const storage = JSON.parse(localStorage.getItem('userConnect'));
@@ -17,31 +17,31 @@ class UpdatePost extends React.Component {
             isAdmin: storage.userAdmin,
             title: postPage.title,
             content: postPage.content,
-            postUrl: postPage.articleUrl
+            postUrl: postPage.postUrl
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange (e) {
+    handleChange(e) {
         const name = e.target.name;
-        const value =  e.target.value;
+        const value = e.target.value;
         this.setState({
             [name]: value
         })
     }
 
-    handleSubmit (e) {
+    handleSubmit(e) {
         e.preventDefault()
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
-        let token = "Bearer " +  storage.token;
-      
+        let token = "Bearer " + storage.token;
+
         const requestOptions = {
             method: 'put',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token 
+                'Authorization': token
             },
             body: JSON.stringify(this.state)
         };
@@ -50,32 +50,32 @@ class UpdatePost extends React.Component {
         let postId = postPage.id;
 
         fetch(('http://localhost:4000/api/posts/' + postId), requestOptions)
-                .then(response => response.json())
-                .then((response) => {
-                    if (response.error) { 
-                        alert("Erreur : " + response.error); 
-                    } else { 
-                        this.setState({ navigation: true })
-                        alert("Votre post à bien été modifié !")
-                    }
+            .then(response => response.json())
+            .then((response) => {
+                if (response.error) {
+                    alert("Erreur : " + response.error);
+                } else {
+                    this.setState({ navigate: true })
+                    alert("Votre post à bien été modifié !")
                 }
-                )
-                .catch(error => {
-                    this.setState({ Erreur: error.toString() });
-                    console.error('Il y a eu une erreur !', error);
+            }
+            )
+            .catch(error => {
+                this.setState({ Erreur: error.toString() });
+                console.error('Il y a eu une erreur !', error);
             });
     }
 
     render() {
-        const { navigation } = this.state;
+        const { navigate } = this.state;
         const postId = this.props.match.params.id;
-        if (navigation) {
-            return <Navigate to={'/post/' + postId}/>;
+        if (navigate) {
+            return <Navigate to={'/post/' + postId} />;
         }
 
         return <React.Fragment>
             <div className="container">
-                <h1>Modifiez ce post</h1>
+                <h1>Modifier ce post</h1>
                 <form>
                     <Field name="title" value={this.state.title} onChange={this.handleChange}>Titre</Field>
                     <Form.Group controlId="exampleForm.ControlTextarea1" >
