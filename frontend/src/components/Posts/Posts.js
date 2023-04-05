@@ -12,6 +12,7 @@ const Posts = () => {
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     let token = "Bearer " + storage.token;
+    console.log(token);
 
     useEffect(() => {
         fetch("http://localhost:4000/api/posts",

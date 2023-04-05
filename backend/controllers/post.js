@@ -42,7 +42,7 @@ exports.getAllPost = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
-// Trouver tous les posts ou userId
+// Trouver tous les posts de userId
 exports.findPostsByUserId = (req, res, next) => {
   Post.findAll({
     where: { userId: req.params.id },

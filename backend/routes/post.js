@@ -20,7 +20,7 @@ router.delete('/:id', postCtrl.deletePost); // Supprimer un post
 
 // Les routes pour les likes et les comments
 router.get('/:id/comments', commentCtrl.getAllComment); // Afficher tous les commentaires
-router.get('/:id/likes', likeCtrl.getAllLike); // Voir tous les likes
+router.get('/:id/likes', likeCtrl.getAllLike); // Afficher tous les likes
 
 // Exporter le module
 module.exports = router;

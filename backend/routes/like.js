@@ -7,7 +7,7 @@ const router = express.Router();
 const likeCtrl = require('../controllers/like');
 
 // Les routes pour les likes
-router.get('/', likeCtrl.getAllLike); // Voir tous les likes
+router.get('/', likeCtrl.getAllLike); // Afficher tous les likes
 router.post('/', likeCtrl.createLike); // Créer un like
 
 module.exports = router;

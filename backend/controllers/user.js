@@ -33,12 +33,10 @@ exports.signup = (req, res, next) => {
     .catch(error => res.status(500).json({ error: 'Erreur côté serveur' }));
 };
 
-
-
 // Connecter un user dans la BDD (login)
 exports.login = (req, res, next) => {
   // Rechercher si le mail est présent dans la BDD
-  db.User.findOne({ email: req.body.email })
+  db.User.findOne({where: { email: req.body.email }})
     .then(user => {
       if (!user) { return res.status(401).json({ error: 'Utilisateur non trouvé !' }); }
       // Controler validité du password
@@ -49,7 +47,7 @@ exports.login = (req, res, next) => {
           // Password correct
           res.status(200).json({
             // Encodage du userId
-            userId: user._id,
+            userId: user.id,
             userAdmin: user.isAdmin,
             token: jwt.sign(
               {
@@ -201,9 +199,9 @@ exports.modifyUser = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
   db.Like.destroy({ where: { userId: req.params.id } })
     .then(() =>
-    db.Comment.destroy({ where: { userId: req.params.id } })
+      db.Comment.destroy({ where: { userId: req.params.id } })
         .then(() =>
-        db.Post.findAll({ where: { userId: req.params.id } })
+          db.Post.findAll({ where: { userId: req.params.id } })
             .then(
               (posts) => {
                 posts.forEach(
@@ -216,7 +214,7 @@ exports.deleteUser = (req, res, next) => {
               }
             )
             .then(() =>
-            db.User.findOne({ where: { id: req.params.id } })
+              db.User.findOne({ where: { id: req.params.id } })
                 .then(user => {
                   const filename = user.imageUrl;
                   fs.unlink(`images/${filename}`, () => {
