@@ -7,9 +7,9 @@ const router = express.Router();
 const commentCtrl = require('../controllers/comment');
 
 // Les routes pour les commentaires
-router.post('/', commentCtrl.createComment);
-router.get('/:id', commentCtrl.getOneComment);
-router.get('/', commentCtrl.getAllComment);
-router.delete('/:id', commentCtrl.deleteComment);
+router.post('/', commentCtrl.createComment); // Créer un commentaire
+router.get('/:id', commentCtrl.getOneComment); // Voir un commentaire
+router.get('/', commentCtrl.getAllComment); // Voir tous les commentaires
+router.delete('/:id', commentCtrl.deleteComment); // Supprimer un commentaire
 
 module.exports = router;

@@ -2,7 +2,7 @@ const db = require("../models");
 const Like = db.likes;
 
 // Lire tous les likes
-exports.findAllLike = (req, res, next) => {
+exports.getAllLike = (req, res, next) => {
   Like.findAll({where: {
     postId: req.params.id}})
     .then(likes => {

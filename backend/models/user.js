@@ -22,28 +22,28 @@ module.exports = (sequelize, Sequelize) => {
 
     password: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: false
     },
 
     lastname: {
-      type: Sequelize.STRING(40),
-      allowNull: false,
+      type: Sequelize.STRING,
+      allowNull: false
     },
 
     firstname: {
-      type: Sequelize.STRING(40),
-      allowNull: false,
+      type: Sequelize.STRING,
+      allowNull: false
     },
 
     isAdmin: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      default: false,
+      defaultValue: 0
     },
 
     imageUrl: {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: true
     },
 
     createdAt: {

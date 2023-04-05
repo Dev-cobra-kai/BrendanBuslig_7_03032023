@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 // Importer helmet (Permet de sécuriser vos applications Express en définissant divers en-têtes http)
 const helmet = require('helmet');
+const auth = require('./middleware/auth');
 // Importer les models de sequelize
 const db = require("./models");
 
@@ -56,11 +57,11 @@ app.use(bodyParser.json());
 // La route de l'authentification
 app.use('/api/users', userRoutes);
 // La route du post
-app.use('/api/posts', postRoutes);
+app.use('/api/posts', auth, postRoutes);
 // La route du like
-app.use('/api/likes', likeRoutes);
+app.use('/api/likes', auth, likeRoutes);
 // La route du comment
-app.use('/api/comments', commentRoutes);
+app.use('/api/comments', auth, commentRoutes);
 // Acceder aux images du dossier images
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

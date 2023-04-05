@@ -1,14 +1,14 @@
 # Les poutes pour Postman
 Authentification par TOKEN
 ## La route POST pour s'inscrire
-http://localhost:3000/api/auth/signup
+http://localhost:3000/api/users/signup
 Body -> raw -> text = JSON
 {
     "email": "bob@free.fr",
     "password": "Azerty123" 
 }
 ## La route POST pour se logger
-http://localhost:3000/api/auth/login
+http://localhost:3000/api/users/login
 Body -> raw -> text = JSON
 {
     "email": "bob@free.fr",

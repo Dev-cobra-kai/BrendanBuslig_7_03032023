@@ -9,24 +9,31 @@ const jwt = require('jsonwebtoken');
 // Importer du module fs de node.js pour accéder aux fichiers du serveur
 const fs = require('fs');
 
+// const User = db.users;
+// const Post = db.posts;
+// const Comment = db.comments;
+// const Like = db.likes;
+
 // Créer un nouvel user dans la BDD (sign up)
 exports.signup = (req, res, next) => {
-// Hasher le password avant de l'envoyer dans la BDD  
+  // Hasher le password avant de l'envoyer dans la BDD  
   bcrypt.hash(req.body.password, 10)
     .then((hash) => {
       // Eléments enregistrés dans la BDD
       db.User.create({
         email: req.body.email,
-        password: hash,       
+        password: hash,
         lastname: req.body.lastname,
         firstname: req.body.firstname,
         isAdmin: false,
       })
-        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))        
+        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch((error) => res.status(400).json({ error: 'Erreur côté client' }));
     })
     .catch(error => res.status(500).json({ error: 'Erreur côté serveur' }));
 };
+
+
 
 // Connecter un user dans la BDD (login)
 exports.login = (req, res, next) => {
@@ -40,15 +47,17 @@ exports.login = (req, res, next) => {
           // Si le password est incorrect
           if (!valid) { return res.status(401).json({ error: 'Mot de passe incorrect !' }); }
           // Password correct
-          res.status(200).json({            
+          res.status(200).json({
             // Encodage du userId
             userId: user._id,
             userAdmin: user.isAdmin,
             token: jwt.sign(
-                {  userId: user.id, 
-                  isAdmin : user.isAdmin  },
-                'RANDOM_TOKEN_SECRET',
-                { expiresIn: '24h' }
+              {
+                userId: user.id,
+                isAdmin: user.isAdmin
+              },
+              'RANDOM_TOKEN_SECRET',
+              { expiresIn: '24h' }
             ),
             message: 'Utilisateur Connecté !'
           });
@@ -61,95 +70,162 @@ exports.login = (req, res, next) => {
 // Afficher tous les users
 exports.getAllUser = (req, res, next) => {
   // Utilisation de findAll() pour voir toutes les users
-  db.User.findAll({
-    attributes: [
-      // Le tableau correspond aux informations demandées à la BDD
-      "id",
-      "firstName",
-      "lastName",
-      "email",
-      "picture",
-    ],
-  })
-    .then((users) => res.status(200).json(users))
-
-    .catch((error) => res.status(500).json({ error }));
+  db.User.findAll()
+    .then(users => {
+      console.log(users);
+      res.status(200).json({ data: users });
+    })
+    .catch(error => res.status(400).json({ error }));
 };
+
+// exports.getAllUser = (req, res, next) => {
+//   // Utilisation de findAll() pour voir toutes les users
+//   db.User.findAll({
+//     attributes: [
+//       // Le tableau correspond aux informations demandées à la BDD
+//       "id",
+//       "firstName",
+//       "lastName",
+//       "email",
+//       "picture",
+//     ],
+//   })
+//     .then((users) => res.status(200).json(users))
+
+//     .catch((error) => res.status(500).json({ error }));
+// };
 
 // Afficher un user
 exports.getOneUser = (req, res, next) => {
-  db.User.findOne({where: {id: req.params.id,
+  db.User.findOne({
+    where: {
+      id: req.params.id,
     },
   })
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(500).json({ error }));
 };
 
+// // Modifier un user
+// exports.modifyUser = async (req, res, next) => {
+//   let newPicture;
+//   let user = await db.User.findOne({ where: { id: req.params.id } });
+
+//   // Si nouvelle image transmise celle ci est enregistrée
+//   if (req.file) {
+//     newPicture = `${req.protocol}://${req.get("host")}/images/${req.file.filename
+//       }`;
+//   }
+
+//   // Si nouvelle image, et image précédente existante, cette dernière est supprimée
+//   if (newPicture && user.picture) {
+//     const filename = user.picture.split("/images/")[1];
+//     fs.unlink(`images/${filename}`, (error) => {
+//       if (error) console.log(error);
+//       else {
+//         console.log(`Deleted file: images/${filename}`);
+//       }
+//     });
+//   }
+//   db.User.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   })
+//     .then(() => {
+//       db.User.update(
+//         {
+//           email: req.body.email,
+//           lastName: req.body.lastName,
+//           firstName: req.body.firstName,
+//           picture: newPicture,
+//         },
+//         {
+//           where: { id: req.params.id },
+//         }
+//       )
+//         .then(() => res.status(200).json({ message: "Compte mis à jour !" }))
+//         .catch((error) => res.status(400).json({ error }));
+//     })
+//     .catch((error) => res.status(500).json({ error }));
+// };
+
 // Modifier un user
-exports.modifyUser = async (req, res, next) => {
-  let newPicture;
-  let user = await db.User.findOne({ where: { id: req.params.id } });
+exports.modifyUser = (req, res, next) => {
+  // éléments de la requète
+  const email = req.body.email;
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
 
-  // Si nouvelle image transmise celle ci est enregistrée
-  if (req.file) {
-    newPicture = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
+  // vérification que tous les champs sont remplis
+  if (email === null || email === '' || firstname === null || firstname === '' || lastname === null || lastname === '') {
+    return res.status(400).json({ 'error': "Les champs 'nom' et 'prénom' doivent être remplis " });
   }
+  // gestion d'ajout/modification image de profil
+  const userObject = req.file ?
+    {
+      ...req.body.user,
+      imageUrl: req.file.filename
+    } : { ...req.body };
 
-  // Si nouvelle image, et image précédente existante, cette dernière est supprimée
-  if (newPicture && user.picture) {
-    const filename = user.picture.split("/images/")[1];
-    fs.unlink(`images/${filename}`, (error) => {
-      if (error) console.log(error);
-      else {
-        console.log(`Deleted file: images/${filename}`);
-      }
-    });
-  }
-  db.User.findOne({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then(() => {
-      db.User.update(
-        {
-          email: req.body.email,  
-          lastName: req.body.lastName,
-          firstName: req.body.firstName,
-          picture: newPicture, 
-        },
-        {
-          where: { id: req.params.id },
-        }
-      )
-        .then(() => res.status(200).json({ message: "Compte mis à jour !" }))
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
+  db.User.update({ ...userObject, id: req.params.id }, { where: { id: req.params.id } })
+    .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
+    .catch(error => res.status(400).json({ error }));
 };
 
 // Supprimer un user
-exports.deleteUser = (req, res, next) => {
-  db.User.findOne({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((user) => {
-      if (user.picture !== null) {
-        // Si photo de profil présente on la supprime du répertoire, puis on supprime l'user de la BDD
-        const filename = user.picture.split("/images/")[1];
-        fs.unlink(`images/${filename}`, () => {
-          db.User.destroy({ where: { id: req.params.id } });
-          res.status(200).json({ message: "Compte supprimé !" });
-        });
-      } else { // Sinon on supprime uniquement l'user
-        db.User.destroy({ where: { id: req.params.id } });
-        res.status(200).json({ message: "Compte supprimé !" });
-      }
-    })
+// exports.deleteUser = (req, res, next) => {
+//   db.User.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   })
+//     .then((user) => {
+//       if (user.picture !== null) {
+//         // Si photo de profil présente on la supprime du répertoire, puis on supprime l'user de la BDD
+//         const filename = user.picture.split("/images/")[1];
+//         fs.unlink(`images/${filename}`, () => {
+//           db.User.destroy({ where: { id: req.params.id } });
+//           res.status(200).json({ message: "Utilisateur supprimé !" });
+//         });
+//       } else { // Sinon on supprime uniquement l'user
+//         db.User.destroy({ where: { id: req.params.id } });
+//         res.status(200).json({ message: "Utilisateur supprimé !" });
+//       }
+//     })
 
-    .catch((error) => res.status(500).json({ error }));
+//     .catch((error) => res.status(500).json({ error }));
+// };
+
+// Supprimer un user
+exports.deleteUser = (req, res, next) => {
+  db.Like.destroy({ where: { userId: req.params.id } })
+    .then(() =>
+    db.Comment.destroy({ where: { userId: req.params.id } })
+        .then(() =>
+        db.Post.findAll({ where: { userId: req.params.id } })
+            .then(
+              (posts) => {
+                posts.forEach(
+                  (post) => {
+                    db.Comment.destroy({ where: { postId: post.id } })
+                    db.Like.destroy({ where: { postId: post.id } })
+                    db.Post.destroy({ where: { id: post.id } })
+                  }
+                )
+              }
+            )
+            .then(() =>
+            db.User.findOne({ where: { id: req.params.id } })
+                .then(user => {
+                  const filename = user.imageUrl;
+                  fs.unlink(`images/${filename}`, () => {
+                    db.User.destroy({ where: { id: req.params.id } })
+                      .then(() => res.status(200).json({ message: 'Utilisateur supprimé !' }))
+                  })
+                })
+            )
+        )
+    )
+    .catch(error => res.status(400).json({ error }));
 };
