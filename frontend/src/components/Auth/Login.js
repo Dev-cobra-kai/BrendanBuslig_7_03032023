@@ -45,7 +45,7 @@ function PrimaryButton({ children }) {
 }
 
 function Login() {
-    localStorage.clear();
+    // localStorage.clear();
     const [error, setError] = useState(null);
     const Auth = React.useContext(AuthApi);
 
@@ -69,9 +69,10 @@ function Login() {
                         alert("Utilisateur non identifié. Tentez de vous connecter à nouveau !")
                     } else {
                         Auth.setAuth(true)
-                        Cookies.set("user", "loginTrue")
+                        Cookies.set("user", storage.token)
                         alert("La communauté de Groupomania est contente de vous revoir !")
                     }
+                    console.log(storage);
                 },
                 (error) => {
                     if (error) {

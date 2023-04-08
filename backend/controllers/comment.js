@@ -1,6 +1,6 @@
 // Importer les models de sequelize
 const db = require('../models');
-const Comment = db.comments;
+const Comment = db.Comment;
 
 // Lire tous les commentaires
 exports.getAllComment = (req, res, next) => {

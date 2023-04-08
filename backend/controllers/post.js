@@ -1,36 +1,36 @@
 // Importer les models de sequelize
 const db = require('../models');
 
-const Post = db.posts;
-const Comment = db.comments;
-const Like = db.likes;
+const Post = db.Post;
+const Comment = db.Comment;
+const Like = db.Like;
 
 // Créer un post
 exports.createPost = (req, res, next) => {
   // éléments de la requète
   const title = req.body.title;
-  const content = req.body.content;
+  const content =  req.body.content;
 
   // vérification que tous les champs sont remplis
-  if (title === null || title === '' || content === null || content === '') {
-    return res.status(400).json({ 'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un post" });
+  if(title === null || title === '' || content === null || content === '') {
+      return res.status(400).json({'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un post"});
   }
 
   const postObject = req.body;
 
-  // Création d'un nouvel objet post
+  // Création d'un nouvel objet article
   const post = new Post({
-    ...postObject,
-  });
-  // Enregistrement de l'objet post dans la base de données
+        ...postObject,
+    });
+  // Enregistrement de l'objet article dans la base de données
   post.save()
-    .then(() => res.status(201).json({ message: 'Post créé !' }))
-    .catch(error => res.status(400).json({ error }));
+    .then(() => res.status(201).json({ message: 'Post créé !'}))
+    .catch(error => res.status(400).json({ error: 'Erreur coté client' }));
 }
 
 // Afficher tous les posts
 exports.getAllPost = (req, res, next) => {
-  Post.findAll({
+  db.Post.findAll({
     order: [
       ['createdAt', 'DESC'],
     ]
@@ -59,7 +59,7 @@ exports.findPostsByUserId = (req, res, next) => {
 
 // Afficher un post par son id
 exports.getOnePost = (req, res, next) => {
-  Post.findOne({ where: { id: req.params.id } })
+  db.Post.findOne({ where: { id: req.params.id } })
     .then(post => {
       console.log(post);
       res.status(200).json(post)

@@ -46,15 +46,15 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true,
     },
 
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    },
+    // createdAt: {
+    //   allowNull: false,
+    //   type: Sequelize.DATE
+    // },
 
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    }
+    // updatedAt: {
+    //   allowNull: false,
+    //   type: Sequelize.DATE
+    // }
   });
 
   return User;

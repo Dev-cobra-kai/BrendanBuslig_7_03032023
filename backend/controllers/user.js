@@ -9,10 +9,10 @@ const jwt = require('jsonwebtoken');
 // Importer du module fs de node.js pour accéder aux fichiers du serveur
 const fs = require('fs');
 
-// const User = db.users;
-// const Post = db.posts;
-// const Comment = db.comments;
-// const Like = db.likes;
+// const User = db.User;
+// const Post = db.Post;
+// const Comment = db.Comment;
+// const Like = db.Like;
 
 // Créer un nouvel user dans la BDD (sign up)
 exports.signup = (req, res, next) => {
@@ -76,23 +76,6 @@ exports.getAllUser = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
-// exports.getAllUser = (req, res, next) => {
-//   // Utilisation de findAll() pour voir toutes les users
-//   db.User.findAll({
-//     attributes: [
-//       // Le tableau correspond aux informations demandées à la BDD
-//       "id",
-//       "firstName",
-//       "lastName",
-//       "email",
-//       "picture",
-//     ],
-//   })
-//     .then((users) => res.status(200).json(users))
-
-//     .catch((error) => res.status(500).json({ error }));
-// };
-
 // Afficher un user
 exports.getOneUser = (req, res, next) => {
   db.User.findOne({
@@ -103,50 +86,6 @@ exports.getOneUser = (req, res, next) => {
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(500).json({ error }));
 };
-
-// // Modifier un user
-// exports.modifyUser = async (req, res, next) => {
-//   let newPicture;
-//   let user = await db.User.findOne({ where: { id: req.params.id } });
-
-//   // Si nouvelle image transmise celle ci est enregistrée
-//   if (req.file) {
-//     newPicture = `${req.protocol}://${req.get("host")}/images/${req.file.filename
-//       }`;
-//   }
-
-//   // Si nouvelle image, et image précédente existante, cette dernière est supprimée
-//   if (newPicture && user.picture) {
-//     const filename = user.picture.split("/images/")[1];
-//     fs.unlink(`images/${filename}`, (error) => {
-//       if (error) console.log(error);
-//       else {
-//         console.log(`Deleted file: images/${filename}`);
-//       }
-//     });
-//   }
-//   db.User.findOne({
-//     where: {
-//       id: req.params.id,
-//     },
-//   })
-//     .then(() => {
-//       db.User.update(
-//         {
-//           email: req.body.email,
-//           lastName: req.body.lastName,
-//           firstName: req.body.firstName,
-//           picture: newPicture,
-//         },
-//         {
-//           where: { id: req.params.id },
-//         }
-//       )
-//         .then(() => res.status(200).json({ message: "Compte mis à jour !" }))
-//         .catch((error) => res.status(400).json({ error }));
-//     })
-//     .catch((error) => res.status(500).json({ error }));
-// };
 
 // Modifier un user
 exports.modifyUser = (req, res, next) => {
@@ -170,30 +109,6 @@ exports.modifyUser = (req, res, next) => {
     .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
     .catch(error => res.status(400).json({ error }));
 };
-
-// Supprimer un user
-// exports.deleteUser = (req, res, next) => {
-//   db.User.findOne({
-//     where: {
-//       id: req.params.id,
-//     },
-//   })
-//     .then((user) => {
-//       if (user.picture !== null) {
-//         // Si photo de profil présente on la supprime du répertoire, puis on supprime l'user de la BDD
-//         const filename = user.picture.split("/images/")[1];
-//         fs.unlink(`images/${filename}`, () => {
-//           db.User.destroy({ where: { id: req.params.id } });
-//           res.status(200).json({ message: "Utilisateur supprimé !" });
-//         });
-//       } else { // Sinon on supprime uniquement l'user
-//         db.User.destroy({ where: { id: req.params.id } });
-//         res.status(200).json({ message: "Utilisateur supprimé !" });
-//       }
-//     })
-
-//     .catch((error) => res.status(500).json({ error }));
-// };
 
 // Supprimer un user
 exports.deleteUser = (req, res, next) => {

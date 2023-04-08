@@ -1,5 +1,5 @@
 const db = require("../models");
-const Like = db.likes;
+const Like = db.Like;
 
 // Lire tous les likes
 exports.getAllLike = (req, res, next) => {

@@ -28,7 +28,7 @@ const Router = () => {
         <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} auth={Auth.auth} />
+            <Route path="/login" auth={Auth.auth} element={<Login />} />
             <Route path="/posts" auth={Auth.auth} element={<Posts />} />
             <Route path="/user/:id" auth={Auth.auth} element={<User />} />
             <Route path="/userdelete/:id" auth={Auth.auth} element={<DeleteAccount />} />

@@ -1,4 +1,3 @@
-// Pour enregistrer un nouvel utilisateur
 module.exports = (sequelize, Sequelize) => {
   const Post = sequelize.define("Post", {
     id: {
@@ -8,14 +7,14 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
     },
 
-    userId: {
-      allowNull: false,
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'id'
-      }
-    },
+    // userId: {
+    //   allowNull: false,
+    //   type: Sequelize.INTEGER,
+    //   references: {
+    //     model: 'User',
+    //     key: 'id'
+    //   }
+    // },
 
     title: {
       allowNull: false,
@@ -32,15 +31,15 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
 
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    },
+    // createdAt: {
+    //   allowNull: false,
+    //   type: Sequelize.DATE
+    // },
 
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    }
+    // updatedAt: {
+    //   allowNull: false,
+    //   type: Sequelize.DATE
+    // }
   });
 
   return Post;

@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'User',
           key: 'id'
         }
       },
@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Posts',
+          model: 'Post',
           key: 'id'
         }
       },
@@ -31,15 +31,15 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: 0
       },
 
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
+      // createdAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE
+      // },
       
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      // updatedAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE
+      // }
     });
   
     return Like;
