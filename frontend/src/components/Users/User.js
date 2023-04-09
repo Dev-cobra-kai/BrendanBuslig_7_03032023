@@ -99,7 +99,7 @@ const User = () => {
                                 key={"userImage" + user.id}
                             />
                         }
-                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate("/imageupdate/" + userId) }}>Modifier</button>
+                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate("/imageupdate/" + userId) }}>Modifier photo</button>
                     </div>
                     <div className="show-post">
                         <h2>{user.firstname} {user.lastname}</h2>

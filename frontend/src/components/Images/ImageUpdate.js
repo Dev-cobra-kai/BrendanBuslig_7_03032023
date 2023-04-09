@@ -62,7 +62,7 @@ class ImageUpdate extends React.Component {
                     <input className="form-control" type="file" name="imageUrl" />
                     <Button color="success" type="Submit">Ajouter photo</Button>
                 </form>
-                <Link to={'/user/' + userId} className="btn btn-outline-info btn-sm">retour à mon compte</Link>
+                <Link to={'/user/' + userId} className="btn btn-outline-info btn-sm">Retour à mon compte</Link>
             </div>
         </div>
     }

@@ -1,11 +1,13 @@
 import React, { useState, useCallback} from 'react';
 import { Navigate, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function DeleteUserAccount ({ match }) {
+function DeleteUserAccount () {
     const [navigate, setNavigate] = useState(false);
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     let token = "Bearer " +  storage.token;
-    let userId = match.params.id;
+    const { id } = useParams();
+    let userId = id;
 
     const handleSubmit = useCallback(function (value) {
 
