@@ -31,7 +31,7 @@ class Signup extends React.Component {
         const value = e.target.value;
         let errors = this.state.errors;
 
-        const validEmailRegex = RegExp(/^(([^<>()[\].,;:s@"]+(.[^<>()[\].,;:s@"]+)*)|(".+"))@(([^<>()[\].,;:s@"]+.)+[^<>()[\].,;:s@"]{2,4})$/i);
+        const validEmailRegex = RegExp(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
 
         switch (name) {
             case 'firstname':

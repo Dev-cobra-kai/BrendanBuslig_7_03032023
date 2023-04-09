@@ -1,21 +1,21 @@
-//imports
+// Import Dépendances
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Routes from './routes/Routes';
 import AuthApi from './components/Auth/AuthApi';
-// import img from './images/icon.png';
+import img from './images/icon.png';
 
-//import CSS & bootsrapreact
+// Import CSS & bootsrap-react
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from "react-bootstrap/Nav";
-// import './App.css';
+import './App.css';
 
 // Composant App
 function App() {
   const [auth, setAuth] = React.useState(false);
 
-  // gestion des cookies
+  // Gestion des cookies
   const readCookie = () => {
     const user = Cookies.get("user");
     if (user) {
@@ -51,7 +51,7 @@ function App() {
       <AuthApi.Provider value={{ auth, setAuth }}>
         <Router>
           <Navbar sticky="top" bg="dark" variant="dark">
-            {/* <Link to="/" className="logo"><img src={img} alt="logo" /></Link> */}
+            <Link to="/" className="logo"><img src={img} alt="logo" /></Link>
             {navLink}
           </Navbar>
           <Routes />

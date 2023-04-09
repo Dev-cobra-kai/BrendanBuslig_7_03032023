@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
+import { useParams } from 'react-router-dom';
 
-const UsersPage = ({match}) => {
+const UsersPage = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [user, setUser] = useState([]);
@@ -11,8 +12,9 @@ const UsersPage = ({match}) => {
     const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
-    const userId = match.params.id;
     let token = "Bearer " +  storage.token;
+    const { id } = useParams();
+    let userId = id;
 
     useEffect(() => {
       fetch("http://localhost:4000/api/users/" + userId,

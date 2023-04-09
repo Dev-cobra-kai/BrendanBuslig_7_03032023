@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       unique: true,
       validate: {
-        is: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, // Utilisation d'un regex pour le format d'adresse mail
+        is: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, // Utilisation d'un regex pour le format d'adresse mail
       },
     },
 
