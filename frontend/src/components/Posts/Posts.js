@@ -12,10 +12,9 @@ const Posts = () => {
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     let token = "Bearer " + storage.token;
-    console.log(token);
-
+   
     useEffect(() => {
-        fetch("http://localhost:4000/api/posts",
+        fetch("http://localhost:4000/api/posts/" ,
             {
                 headers:
                     { "Authorization": token }
@@ -31,7 +30,7 @@ const Posts = () => {
                     setError(error);
                 }
             )
-    }, [token])
+        }, [token])
 
     useEffect(() => {
         fetch("http://localhost:4000/api/users/",
@@ -62,7 +61,7 @@ const Posts = () => {
                 <div className="container">
                     <h1>Tous les posts publiés</h1>
                     <div className="form-submit">
-                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate.push("/createpost/") }}>Publier un post</button>
+                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate("/createpost/") }}>Publier un post</button>
                     </div>
                     {posts.map((post) => (
                         <div className="post-card" key={"postCard" + post.id}>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
 import Form from 'react-bootstrap/Form'
+// import { useParams } from 'react-router-dom';
 
 class Comments extends React.Component {
 
@@ -25,8 +26,8 @@ class Comments extends React.Component {
     componentDidMount() {
         const userConnect = JSON.parse(localStorage.getItem('userConnect'));
         let token = "Bearer " + userConnect.token;
-
-        const postId = this.props.match.params.id;
+        // const { id } = useParams();
+        const postId = this.props.id;
         fetch("http://localhost:4000/api/posts/" + postId + "/comments/",
             {
                 headers:

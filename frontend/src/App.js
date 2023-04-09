@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import Routes from './components/Routes/Routes';
+import Routes from './routes/Routes';
 import AuthApi from './components/Auth/AuthApi';
 // import img from './images/icon.png';
 
@@ -35,7 +35,7 @@ function App() {
 
     navLink = <>
       <Nav className="mr-auto">
-        <Link to="/posts" className="nav-link">Tous les posts</Link>
+        <Link to="/posts" className="nav-link">Fil d'actualité</Link>
         <Link to={"/user/" + userId} className="nav-link">Mon compte</Link>
       </Nav>
     </>

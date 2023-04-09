@@ -28,7 +28,7 @@ exports.signup = (req, res, next) => {
         isAdmin: false,
       })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error: 'Erreur côté client' }));
+        .catch((error) => res.status(400).json({ error: 'Formulaire non valide ! Veuillez ressaisir vos données' }));
     })
     .catch(error => res.status(500).json({ error: 'Erreur côté serveur' }));
 };

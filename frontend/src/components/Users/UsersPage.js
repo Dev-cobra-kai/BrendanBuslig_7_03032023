@@ -60,7 +60,7 @@ const UsersPage = ({match}) => {
         return <div>Chargement...</div>;
     } else if (storage.userAdmin === true) {
         idUser = <div className="user-button">
-            <button className="btn btn-outline-danger btn-sm" onClick={() => {navigate.push("/adminuserdelete/" + userId)}}>Supprimer</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => {navigate("/adminuserdelete/" + userId)}}>Supprimer</button>
         </div>
     }
 

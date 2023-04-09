@@ -28,11 +28,17 @@ module.exports = (sequelize, Sequelize) => {
     lastname: {
       type: Sequelize.STRING,
       allowNull: false,
+      validate: {
+        is: /^[a-z ,.'-]+$/i, // Utilisation d'un regex pour le format du nom
+      },
     },
 
     firstname: {
       type: Sequelize.STRING,
       allowNull: false,
+      validate: {
+        is: /^[a-z ,.'-]+$/i, // Utilisation d'un regex pour le format du prénom
+      },
     },
 
     isAdmin: {
@@ -46,16 +52,33 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true,
     },
 
-    // createdAt: {
-    //   allowNull: false,
-    //   type: Sequelize.DATE
-    // },
-
-    // updatedAt: {
-    //   allowNull: false,
-    //   type: Sequelize.DATE
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    //   get() {
+    //     return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
     // }
+    },
+
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    }
   });
+  // On a besoin d'associer les utilisateurs avec les posts dans mysql, on utilise alors les fonctions de sequelize
+  // "models" est juste un argument qui a accès à tous modèles disponible
+  // Posts.hasMany(models.Comments) = chaque utilisateur a beaucoup de posts et à la suppression "cascade" permet de supprimer tous les posts/commentaires associés
+  // Permet de créer la colonne UserId dans la table Posts
+  User.associate = (models) => {
+    User.hasMany(models.Post,
+      { onDelete: 'cascade' });
+
+    User.hasMany(models.Comment,
+      { onDelete: 'cascade' });
+
+    User.hasMany(models.Like,
+      { onDelete: 'cascade' });
+  };
 
   return User;
 };

@@ -30,7 +30,7 @@ exports.createPost = (req, res, next) => {
 
 // Afficher tous les posts
 exports.getAllPost = (req, res, next) => {
-  db.Post.findAll({
+  Post.findAll({
     order: [
       ['createdAt', 'DESC'],
     ]

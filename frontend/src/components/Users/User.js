@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
-import img from '../../images/icon.png';
+import img from '../../images/profil.png';
 import AuthApi from '../Auth/AuthApi';
 import Cookies from 'js-cookie';
 
@@ -60,6 +60,7 @@ const User = () => {
     const handleOnclick = () => {
         Auth.setAuth(false);
         Cookies.remove("user");
+        navigate("/login/")
         localStorage.clear();
     }
 
@@ -70,8 +71,8 @@ const User = () => {
         return <div>Chargement...</div>;
     } else if (user.id === userId || user.isAdmin === true) {
         idUser = <div className="user-button">
-            <button className="btn btn-outline-info btn-sm" onClick={() => { navigate.push("/userupdate/" + userId) }}>Modifier</button>
-            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate.push("/userdelete/" + userId) }}>Supprimer</button>
+            <button className="btn btn-outline-info btn-sm" onClick={() => { navigate("/userupdate/" + userId) }}>Modifier</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate("/userdelete/" + userId) }}>Supprimer</button>
             <button className="btn btn-outline-dark btn-sm" onClick={handleOnclick}>Déconnecter</button>
         </div>
     }
@@ -79,7 +80,7 @@ const User = () => {
     return (
         <React.Fragment>
             <div className="container">
-                <h1>Bienvenue {user.firstname} !</h1>
+                <h1>Bienvenue {user.firstname} !!!</h1>
                 {storage.userAdmin === true ?
                     <p>Compte Administrateur</p> : <></>}
                 <div className="user-page">
@@ -96,7 +97,7 @@ const User = () => {
                                 key={"userImage" + user.id}
                             />
                         }
-                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate.push("/imageupdate/" + userId) }}>Modifier</button>
+                        <button className="btn btn-outline-info btn-sm" onClick={() => { navigate("/imageupdate/" + userId) }}>Modifier</button>
                     </div>
                     <div className="show-post">
                         <h2>{user.firstname} {user.lastname}</h2>

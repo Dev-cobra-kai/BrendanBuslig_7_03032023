@@ -11,6 +11,8 @@ const helmet = require('helmet');
 const auth = require('./middleware/auth');
 // Importer les models de sequelize
 const db = require("./models");
+// Importer le module CORS
+const cors = require('cors');
 
 // Importer la route user
 const userRoutes = require('./routes/user');
@@ -37,11 +39,20 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 // Gérer les problèmes de CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
+
+// Gérer les problèmes de CORS
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+  })
+);
 
 // Mise à jour de la BDD
 db.sequelize.sync({ force: false })

@@ -50,7 +50,7 @@ class Signup extends React.Component {
                 errors.email =
                     validEmailRegex.test(value)
                         ? ''
-                        : 'Veuillez entrer un email valide ! (ex : groupomania@mail.com)';
+                        : 'Veuillez entrer un email valide ! (ex : martin@mail.fr)';
                 break;
             case 'password':
                 errors.password =

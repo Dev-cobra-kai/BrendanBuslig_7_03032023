@@ -4,13 +4,13 @@ import Moment from 'react-moment';
 import Comments from "../Comments/Comments";
 import Badge from 'react-bootstrap/Badge'
 import img from '../../images/icon.png';
+import { useParams } from 'react-router-dom';
 
 
-function PostPage({ match }) {
+function PostPage() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setPost] = useState([]);
-
     const [likes, setLikes] = useState([]);
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
@@ -18,8 +18,8 @@ function PostPage({ match }) {
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     let token = "Bearer " + storage.token;
     let userId = storage.userId;
-
-    let postId = match.params.id;
+    const { id } = useParams();
+    let postId = id;
 
     useEffect(() => {
         fetch("http://localhost:4000/api/posts/" + postId,
@@ -111,12 +111,12 @@ function PostPage({ match }) {
         return <div>Chargement...</div>;
     } else if (post.userId === storage.userId) {
         userAuth = <div className="post-button">
-            <button className="btn btn-outline-info btn-sm" onClick={() => { navigate.push("/postupdate/" + postId) }}>Modifier</button>
-            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate.push("/postdelete/" + postId) }}>Supprimer</button>
+            <button className="btn btn-outline-info btn-sm" onClick={() => { navigate("/postupdate/" + postId) }}>Modifier</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate("/postdelete/" + postId) }}>Supprimer</button>
         </div>
     } else if (storage.userAdmin === true) {
         userAuth = <div className="post-button">
-            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate.push("/postdelete/" + postId) }}>Supprimer</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate("/postdelete/" + postId) }}>Supprimer</button>
         </div>
     }
 

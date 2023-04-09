@@ -31,16 +31,40 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: 0
       },
 
-      // createdAt: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
       
-      // updatedAt: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // }
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
+
+    Like.associate = (models) => {
+      User.belongsToMany(models.Post, {
+        through: models.Like,
+        foreignKey: 'userId',
+        otherKey: 'postId',
+      });
+  
+      Post.belongsToMany(models.User, {
+        through: models.Like,
+        foreignKey: 'postId',
+        otherKey: 'userId',
+      });
+  
+      Like.belongsTo(models.User, {
+        foreignKey: 'userId',
+        as: 'user',
+      });
+  
+      Like.belongsTo(models.Post, {
+        foreignKey: 'postId',
+        as: 'post',
+      });
+    };
   
     return Like;
   };

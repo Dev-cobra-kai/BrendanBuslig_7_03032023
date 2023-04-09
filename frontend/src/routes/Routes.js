@@ -3,22 +3,22 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Imports composants
-import AuthApi from '../Auth/AuthApi';
-import Home from '../../pages/Home';
-import Signup from '../Auth/Signup';
-import Login from '../Auth/Login';
-import User from '../Users/User';
-import UsersPage from '../Users/UsersPage';
-import UpdateAccount from '../Users/UpdateAccount';
-import DeleteAccount from '../Users/DeleteAccount';
-import DeleteUserAccount from '../Users/DeleteUserAccount';
-import Posts from '../Posts/Posts';
-import PostPage from '../Posts/PostPage';
-import CreatePost from '../Posts/CreatePost';
-import UpdatePost from '../Posts/UpdatePost';
-import DeletePost from '../Posts/DeletePost';
-import DeleteComment from '../Comments/DeleteComment';
-import ImageUpdate from '../Images/ImageUpdate';
+import AuthApi from '../components/Auth/AuthApi';
+import Home from '../pages/Home';
+import Signup from '../components/Auth/Signup';
+import Login from '../components/Auth/Login';
+import User from '../components/Users/User';
+import UsersPage from '../components/Users/UsersPage';
+import UpdateAccount from '../components/Users/UpdateAccount';
+import DeleteAccount from '../components/Users/DeleteAccount';
+import DeleteUserAccount from '../components/Users/DeleteUserAccount';
+import Posts from '../components/Posts/Posts';
+import PostPage from '../components/Posts/PostPage';
+import CreatePost from '../components/Posts/CreatePost';
+import UpdatePost from '../components/Posts/UpdatePost';
+import DeletePost from '../components/Posts/DeletePost';
+import DeleteComment from '../components/Comments/DeleteComment';
+import ImageUpdate from '../components/Images/ImageUpdate';
 
 const Router = () => {
 

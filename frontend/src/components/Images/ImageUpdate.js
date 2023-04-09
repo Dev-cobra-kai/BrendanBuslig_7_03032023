@@ -39,7 +39,7 @@ class ImageUpdate extends React.Component {
                 if (res.ok) {
                     alert("Votre image à bien été modifiée !");
                 } else if (res.status === 401) {
-                    alert("Une erreur s'est produite, rententez ! ");
+                    alert("Une erreur s'est produite, retentez ! ");
                 }
             }, function (e) {
                 alert("Une erreur s'est produite : " + e);
@@ -60,7 +60,7 @@ class ImageUpdate extends React.Component {
             <div className="update-image">
                 <form className="addPhotoForm" onSubmit={this.handleSubmit}>
                     <input className="form-control" type="file" name="imageUrl" />
-                    <Button color="success" type="Submit">Add</Button>
+                    <Button color="success" type="Submit">Ajouter photo</Button>
                 </form>
                 <Link to={'/user/' + userId} className="btn btn-outline-info btn-sm">retour à mon compte</Link>
             </div>

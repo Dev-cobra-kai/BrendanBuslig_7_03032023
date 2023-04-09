@@ -31,16 +31,30 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
 
-    // createdAt: {
-    //   allowNull: false,
-    //   type: Sequelize.DATE
-    // },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
 
-    // updatedAt: {
-    //   allowNull: false,
-    //   type: Sequelize.DATE
-    // }
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    }
   });
+
+  Post.associate = (models) => {
+    Post.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    Post.hasMany(models.Comment,
+      { onDelete: 'cascade' });
+
+    Post.hasMany(models.Like,
+      { onDelete: 'cascade' });
+  };
 
   return Post;
 };

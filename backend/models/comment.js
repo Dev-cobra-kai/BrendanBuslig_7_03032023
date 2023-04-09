@@ -30,16 +30,40 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
 
-    // createdAt: {
-    //   allowNull: false,
-    //   type: Sequelize.DATE
-    // },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
 
-    // updatedAt: {
-    //   allowNull: false,
-    //   type: Sequelize.DATE
-    // }
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    }
   });
+
+  Comment.associate = (models) => {
+    User.belongsToMany(models.Post, {
+      through: models.Comment,
+      foreignKey: 'userId',
+      otherKey: 'postId',
+    });
+
+    Post.belongsToMany(models.User, {
+      through: models.Comment,
+      foreignKey: 'postId',
+      otherKey: 'userId',
+    });
+
+    Comment.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'user',
+    });
+
+    Comment.belongsTo(models.Post, {
+      foreignKey: 'postId',
+      as: 'post',
+    });
+  };
 
   return Comment;
 };

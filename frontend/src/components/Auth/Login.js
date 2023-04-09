@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useContext, useMemo, createContext } from 'react';
 import AuthApi from './AuthApi';
 import Cookies from 'js-cookie';
+// import { useNavigate } from 'react-router-dom';
 
 const FormContext = createContext({})
 
@@ -41,6 +42,7 @@ function FormField({ name, type, children }) {
 }
 
 function PrimaryButton({ children }) {
+    //   const navigate = useNavigate();
     return <button className="btn btn-info">{children}</button>
 }
 
@@ -48,6 +50,7 @@ function Login() {
     // localStorage.clear();
     const [error, setError] = useState(null);
     const Auth = React.useContext(AuthApi);
+  
 
     const handleSubmit = useCallback(function (value) {
 
