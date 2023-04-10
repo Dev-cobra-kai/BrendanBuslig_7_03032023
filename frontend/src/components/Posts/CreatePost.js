@@ -76,7 +76,10 @@ class CreatePost extends React.Component {
                     <Field name="title" value={this.state.title} onChange={this.handleChange}>Titre</Field>
                     <Form.Group controlId="exampleForm.ControlTextarea1" >
                         <Form.Label>Contenu du post</Form.Label>
-                        <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
+                        {/* <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} /> */}
+                    
+                    <input className="form-control" type="file" name="content" value={this.state.content} onChange={this.handleChange}/>
+                   
                     </Form.Group>
                     <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>URL d'un post</Field>
                     <div className="form-submit">

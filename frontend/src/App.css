@@ -5,17 +5,13 @@
     border-radius: 50%;
     border: 1px solid black;
     text-decoration: none;
-    -webkit-transform: scale(0.8);
     transform: scale(0.8);
     opacity: 0.9;
-    -webkit-transition: -webkit-transform 300ms ease-in-out;
-    transition: -webkit-transform 300ms ease-in-out;
     transition: transform 300ms ease-in-out;
     transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
 }
 
 #root a img:hover {
-    -webkit-transform: scale(1);
     transform: scale(1);
     opacity: 1;
 }
@@ -30,15 +26,8 @@
     width: 90%;
     margin: 1em auto;
     padding: 2em;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
 }
 
@@ -46,13 +35,13 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.3em;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .container h2 {
     font-size: 0.9em;
     text-align: center;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .container p {
@@ -64,7 +53,7 @@
 .container p a {
     font-size: 0.9em;
     font-weight: bold;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .container p a:hover {
@@ -73,11 +62,7 @@
 
 .container .post-option {
     margin: 2em;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -96,8 +81,6 @@
 }
 
 .container .comment-card h3 {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     font-size: 0.9em;
 }
@@ -105,7 +88,7 @@
 .container .comment-card h3 a {
     padding: 0em;
     margin-left: 0.5em;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .container .comment-card h3 a:hover {
@@ -114,11 +97,8 @@
 
 /* La page des posts */
 .post-card {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-shadow: 0 0 20px #bababa;
-    box-shadow: 0 0 20px #bababa;
+    box-shadow: 0 0 20px #FFD7D7;
     margin: 1em;
     padding: 1em;
 }
@@ -136,8 +116,6 @@
 }
 
 .post-card .show-post h2 {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     font-size: 1em;
     color: black;
@@ -147,7 +125,7 @@
     font-weight: bold;
     padding: 0em;
     margin-left: 0.5em;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .post-card .show-post h2 a:hover {
@@ -156,7 +134,7 @@
 
 .post-card .show-post h3 {
     font-size: 0.9em;
-    color: #454545;
+    color: #4E5166;
     text-align: left;
 }
 
@@ -168,11 +146,11 @@
 
 .post-card .show-post #created-at {
     font-size: 0.8em;
-    color: #454545;
+    color: #4E5166;
 }
 
 .post-card .show-post a {
-    color: indianred;
+    color: #FD2D01;
     padding-left: 0em;
     text-align: left;
 }
@@ -184,11 +162,7 @@
 /* Boutons et Formulaire */
 .form-submit {
     margin: 1em;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -197,11 +171,7 @@
 }
 
 .user-page {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     background-color: whitesmoke;
     padding: 1.3em;
@@ -209,15 +179,8 @@
 }
 
 .user-page .images {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-pack: baseline;
-    -ms-flex-pack: baseline;
     justify-content: baseline;
     width: 20%;
 }
@@ -253,20 +216,12 @@
 }
 
 .user-page .user-button {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-pack: right;
-    -ms-flex-pack: right;
     justify-content: right;
     width: 20%;
     padding: 0.5em;
-    -webkit-box-shadow: 0 0 20px #bababa;
-    box-shadow: 0 0 20px #bababa;
+    box-shadow: 0 0 20px #FFD7D7;
 }
 
 .user-page .user-button p {
@@ -280,7 +235,7 @@
 
 /* Affichage des posts sur les pages utilisateurs */
 .user-post {
-    background-color: indianred;
+    background-color: #FD2D01;
     margin-top: Oem;
 }
 
@@ -294,16 +249,15 @@
 }
 
 .user-post p {
-    font-size: 0.9em;
+     font-size: 0.9em;
     text-align: left;
-    color: #454545;
+    color: #4E5166; 
 }
 
 .user-post a {
     font-size: 1em;
     font-weight: bold;
-    color: indianred;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .user-post a:hover {
@@ -311,8 +265,7 @@
 }
 
 .user-post .user-posts {
-    -webkit-box-shadow: 0 0 20px #bababa;
-    box-shadow: 0 0 20px #bababa;
+    box-shadow: 0 0 20px #FFD7D7;
     background-color: whitesmoke;
     margin: 1em;
     padding: 1.2em;
@@ -321,7 +274,7 @@
 .user-post .user-posts a {
     font-weight: bold;
     padding: 0em 0em 0.5em 0em;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .user-post .user-posts a:hover {
@@ -340,10 +293,7 @@
 
 /* Affichage contenu posts (page d'un post) */
 .post-present {
-    -webkit-box-shadow: 0 0 20px #bababa;
-    box-shadow: 0 0 20px #bababa;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    box-shadow: 0 0 20px #FFD7D7;
     display: flex;
 }
 
@@ -362,8 +312,6 @@
 }
 
 .post-present .post-content h2 {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     font-size: 1em;
     color: black;
@@ -374,7 +322,7 @@
     font-weight: bold;
     padding: 0em;
     margin-left: 0.5em;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .post-present .post-content h2 a:hover {
@@ -390,15 +338,8 @@
 }
 
 .post-present .post-content .post-page .show-post {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-pack: left;
-    -ms-flex-pack: left;
     justify-content: left;
     margin-bottom: 0.5em;
     width: 70%;
@@ -412,7 +353,7 @@
 
 .post-present .post-content .post-page .show-post a {
     padding: 0.5em 0em 0.6em 0em;
-    color: indianred;
+    color: #FD2D01;
     font-size: 0.9em;
 }
 
@@ -421,11 +362,7 @@
 }
 
 .post-present .post-content .post-page .post-button {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -434,11 +371,7 @@
 }
 
 .post-present .post-content .likes {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
     margin: 1em;
 }
@@ -449,7 +382,7 @@
 }
 
 .comment-div {
-    background-color: indianred;
+    background-color: #FD2D01;
 }
 
 .comment-div h2 {
@@ -463,7 +396,7 @@
 .comment-div h3 {
     font-size: 0.8em;
     font-weight: bold;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .comment-div p {
@@ -471,18 +404,10 @@
 }
 
 .comment-div .post-comment {
-    -webkit-box-shadow: 0 0 20px #bababa;
-    box-shadow: 0 0 20px #bababa;
+    box-shadow: 0 0 20px #FFD7D7;
     background-color: whitesmoke;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     margin: 2em 3em 2em 3em;
     padding: 1em;
@@ -504,10 +429,7 @@
     margin: 1em 4em 1em 4em;
     background-color: whitesmoke;
     padding: 0.5em;
-    -webkit-box-shadow: 0 0 20px #bababa;
-    box-shadow: 0 0 20px #bababa;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    box-shadow: 0 0 20px #FFD7D7;
     display: flex;
 }
 
@@ -525,9 +447,7 @@
 }
 
 .comment-div .form-comment .comment-card h3 {
-    color: #454545;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    color: #4E5166;
     display: flex;
     font-size: 0.9em;
 }
@@ -555,7 +475,7 @@
 .comment-div .form-comment .comment-card .post-option a {
     font-size: 0.8em;
     padding: 0.5em;
-    color: indianred;
+    color: #FD2D01;
 }
 
 .comment-div .form-comment .comment-card .post-option a:hover {
@@ -564,22 +484,15 @@
 
 /* Page modifier image */
 .update-image {
-    -webkit-box-shadow: 0 0 20px #bababa;
-    box-shadow: 0 0 20px #bababa;
+    -webkit-box-shadow: 0 0 20px #FFD7D7;
+    box-shadow: 0 0 20px #FFD7D7;
     margin-top: 1.5em;
     padding: 2em;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
 }
 
 .update-image .addPhotoForm {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     margin: 1em;
 }
@@ -605,12 +518,7 @@
 
     .container .comment-card h3 {
         font-size: 0.8em;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
         margin-bottom: 0.5em;
     }
@@ -634,15 +542,8 @@
     }
 
     .user-page {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
         justify-content: center;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -666,28 +567,16 @@
     }
 
     .user-page .user-button {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
         justify-content: center;
-        -webkit-box-shadow: none;
         box-shadow: none;
         margin: auto;
         width: 80%;
     }
 
     .update-image .addPhotoForm {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
     }
@@ -712,12 +601,7 @@
         padding: 0em;
         margin: 0.5em auto 0.5em auto;
         width: 100%;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -729,14 +613,8 @@
 
     /* Page un seul post */
     .post-present {
-        -webkit-box-shadow: 0 0 20px #bababa;
         box-shadow: 0 0 20px #bababa;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -752,12 +630,7 @@
     }
 
     .comment-div .post-comment {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
         margin: 2em;
     }
@@ -768,20 +641,13 @@
 
     .comment-div .post-comment .form-submit {
         margin: 1em;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
         justify-content: center;
     }
 
     .comment-div .form-comment {
         margin: 0.5em;
         padding: 0em;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -812,7 +678,6 @@
     }
 }
 
-
 /* Ecrans entre 360px et 780 px  */
 @media only screen and (max-width: 780px) and (min-width: 360px) {
     .container {
@@ -822,12 +687,7 @@
 
     .container .comment-card h3 {
         font-size: 0.8em;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
         margin-bottom: 0.5em;
     }
@@ -851,15 +711,8 @@
 
     /* Page user */
     .user-page {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
         justify-content: center;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -886,26 +739,15 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
         justify-content: center;
-        -webkit-box-shadow: none;
         box-shadow: none;
         margin: auto;
         width: 80%;
     }
 
     .update-image .addPhotoForm {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -929,12 +771,7 @@
         padding: 0em;
         margin: 0.5em auto 0.5em auto;
         width: 100%;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -946,14 +783,8 @@
 
     /* Page un post */
     .post-present {
-        -webkit-box-shadow: 0 0 20px #bababa;
         box-shadow: 0 0 20px #bababa;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -969,32 +800,20 @@
     }
 
     .comment-div .post-comment {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
         margin: 2em;
     }
 
     .comment-div .post-comment .form-submit {
         margin: 1em;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
         justify-content: center;
     }
 
     .comment-div .form-comment {
         margin: 0.5em;
         padding: 0em;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 

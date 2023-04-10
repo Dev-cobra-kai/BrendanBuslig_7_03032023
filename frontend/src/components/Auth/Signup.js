@@ -83,7 +83,7 @@ class Signup extends React.Component {
             console.info('Formulaire valide !')
             console.log(this.state)
             const requestOptions = {
-                method: 'POST',
+                method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer token'

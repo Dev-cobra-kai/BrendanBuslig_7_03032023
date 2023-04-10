@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useContext, useMemo, createContext } from 'react';
 import AuthApi from './AuthApi';
 import Cookies from 'js-cookie';
-// import { useNavigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
+
 
 const FormContext = createContext({})
 
@@ -41,8 +42,9 @@ function FormField({ name, type, children }) {
     </div>
 }
 
-function PrimaryButton({ children }) {
-    //   const navigate = useNavigate();
+function PrimaryButton ({children}) {
+//     // const navigate = useNavigate();
+//     //   return <button className="btn btn-info"onClick={() => { navigate("/login/") }}>{children}</button>
     return <button className="btn btn-info">{children}</button>
 }
 
@@ -50,10 +52,8 @@ function Login() {
     // localStorage.clear();
     const [error, setError] = useState(null);
     const Auth = React.useContext(AuthApi);
-  
-
     const handleSubmit = useCallback(function (value) {
-
+      
         fetch("http://localhost:4000/api/users/login/", {
             method: "post",
             headers: { "Content-type": 'application/json' },
@@ -82,10 +82,9 @@ function Login() {
                         setError(error);
                         Auth.setAuth(false)
                     }
-                }
+                }                           
             )
-    }, [Auth])
-
+    } , [Auth])   
     if (error) {
         return <div>Erreur : {error.message}</div>;
     } else {
@@ -97,6 +96,7 @@ function Login() {
                         <FormField name="email" type="text">Email</FormField>
                         <FormField name="password" type="password">Mot de passe</FormField>
                         <PrimaryButton>Me connecter</PrimaryButton>
+                        {/* <button onClick={() => { Navigate("/posts/") }}>Me connecter</button> */}
                     </FormWithContext>
                 </div>
             </React.Fragment>

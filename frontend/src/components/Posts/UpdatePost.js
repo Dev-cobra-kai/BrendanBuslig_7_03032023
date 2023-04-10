@@ -3,6 +3,7 @@ import { Navigate, Link } from 'react-router-dom';
 import Field from '../Form/Field';
 import Form from 'react-bootstrap/Form'
 
+
 class UpdatePost extends React.Component {
 
     state = { navigate: false };
@@ -36,7 +37,6 @@ class UpdatePost extends React.Component {
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
         let token = "Bearer " + storage.token;
-
         const requestOptions = {
             method: 'put',
             headers: {
@@ -65,12 +65,18 @@ class UpdatePost extends React.Component {
                 console.error('Il y a eu une erreur !', error);
             });
     }
-
+  
     render() {
+
+        const storage = JSON.parse(localStorage.getItem('userConnect'));
+        const userId = storage.userId;
+
         const { navigate } = this.state;
-        const postId = this.props.match.params.id;
+        // const { id } = useParams();
+        // const postId = id;
+        
         if (navigate) {
-            return <Navigate to={'/post/' + postId} />;
+            return <Navigate to={'/user/' + userId} />;
         }
 
         return <React.Fragment>

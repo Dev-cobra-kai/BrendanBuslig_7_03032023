@@ -80,7 +80,7 @@ class UpdateAccount extends React.Component {
                     <Form.Group controlId="exampleForm.ControlTextarea1" ></Form.Group>
                     <div className="form-submit">
                         <button className="btn btn-outline-success btn-sm" onClick={this.handleSubmit}>Enregistrer les modifications</button>
-                        <Link to={'/user/' + userId} className="btn btn-outline-info btn-sm">retour à mon compte</Link>
+                        <Link to={'/user/' + userId} className="btn btn-outline-info btn-sm">Retour à mon compte</Link>
                     </div>
                 </form>
             </div>

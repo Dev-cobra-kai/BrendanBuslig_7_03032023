@@ -109,7 +109,7 @@ const User = () => {
                 <div className="user-post">
                     <h2>Vos posts</h2>
                     {posts.map((post) => (
-                        <div className="user-post" key={"user" + post.id}>
+                        <div className="user-posts" key={"user" + post.id}>
                             <Link to={"/post/" + post.id} key={"post" + post.id} className="nav-link">{post.title}</Link>
                             <p key={"post" + post.id}>{post.content}</p>
                             <h3 key={"date" + post.id}>Publié le <Moment key={"date" + post.id} format="DD MMM YYYY" date={post.createdAt} /></h3>

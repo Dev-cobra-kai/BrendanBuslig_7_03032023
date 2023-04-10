@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import Comments from "../Comments/Comments";
 import Badge from 'react-bootstrap/Badge'
 import img from '../../images/icon.png';
-import { useParams } from 'react-router-dom';
 
 
 function PostPage() {
