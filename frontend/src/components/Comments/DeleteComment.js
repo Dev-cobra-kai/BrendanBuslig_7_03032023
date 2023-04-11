@@ -30,7 +30,7 @@ class DeleteComment extends React.Component {
             },
             body: JSON.stringify(this.state)
         };
-
+        // const { id } = useParams();
         const commentId = this.props.match.params.id;
 
         fetch(('http://localhost:4000/api/comments/' + commentId), requestOptions)

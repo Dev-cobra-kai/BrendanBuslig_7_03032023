@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useContext, useMemo, createContext } from 'react';
 import AuthApi from './AuthApi';
 import Cookies from 'js-cookie';
-// import { Navigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 const FormContext = createContext({})
@@ -43,9 +43,9 @@ function FormField({ name, type, children }) {
 }
 
 function PrimaryButton ({children}) {
-//     // const navigate = useNavigate();
-//     //   return <button className="btn btn-info"onClick={() => { navigate("/login/") }}>{children}</button>
-    return <button className="btn btn-info">{children}</button>
+    // const navigate = useNavigate();
+    //   return <button className="btn btn-info"onClick={() => { navigate("/posts/") }}>{children}</button>
+    return <button  to="/posts" className="btn btn-info">{children}</button>
 }
 
 function Login() {

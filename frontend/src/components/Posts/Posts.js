@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
+// import Cookies from 'js-cookie';
 
 const Posts = () => {
     const [error, setError] = useState(null);
