@@ -1,3 +1,5 @@
+// LA PAGE PROFIL SUR LES POSTS
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Moment from 'react-moment';

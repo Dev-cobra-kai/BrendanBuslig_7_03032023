@@ -1,3 +1,4 @@
+// Exporter le model like
 module.exports = (sequelize, Sequelize) => {
     const Like = sequelize.define("Like", {
       id: {

@@ -10,4 +10,5 @@ const likeCtrl = require('../controllers/like');
 router.get('/', likeCtrl.getAllLike); // Afficher tous les likes
 router.post('/', likeCtrl.createLike); // Créer un like
 
+// Exporter le module
 module.exports = router;

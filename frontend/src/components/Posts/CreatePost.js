@@ -1,3 +1,5 @@
+// LA PAGE CREER UN POST
+
 import * as React from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import Field from '../Form/Field';
@@ -6,10 +8,8 @@ import Form from 'react-bootstrap/Form'
 class CreatePost extends React.Component {
 
     state = { navigate: false };
-
     constructor(props) {
         super(props)
-
         const userConnect = JSON.parse(localStorage.getItem('userConnect'));
 
         this.state = {
@@ -34,6 +34,10 @@ class CreatePost extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
 
+        const formData = new FormData();
+        const imagedata = document.querySelector('input[type="file"]').files[0];
+        formData.append('image', imagedata);
+
         const storage = JSON.parse(localStorage.getItem('userConnect'));
         let token = "Bearer " + storage.token;
 
@@ -41,12 +45,12 @@ class CreatePost extends React.Component {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
+                'Authorization': token,
             },
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:4000/api/posts/'), requestOptions)
+        fetch(('http://localhost:4000/api/posts/'), requestOptions, formData)
             .then(response => response.json())
             .then(
                 (response) => {
@@ -78,13 +82,14 @@ class CreatePost extends React.Component {
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
                     </Form.Group>
-                    <Form.Group className="my-3">
-                                <Form.Label>Ajouter une image :</Form.Label>
-                                <Form.Control type="file" id="file" accept=".jpg" onChange={this.handleFileChange} />
-                            </Form.Group>
+                    <div className="update-image">
+                        <form className="addPhotoForm" name="postUrl" value={this.state.postUrl}  onSubmit={this.handleSubmit}>
+                            <input className="form-control" type="file" name="postUrl" />
+                        </form>
+                    </div>
                     {/* <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>URL d'un post</Field> */}
                     <div className="form-submit">
-                        <button className="btn btn-outline-success btn-sm" onClick={this.handleSubmit}>Publiez le post</button>
+                        <button className="btn btn-outline-success btn-sm" type="Submit" onClick={this.handleSubmit}>Publiez le post</button>
                         <Link to='/posts' className="btn btn-outline-info btn-sm">Retour aux posts</Link>
                     </div>
                 </form>

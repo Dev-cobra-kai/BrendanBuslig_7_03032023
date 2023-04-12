@@ -2,7 +2,7 @@
 const db = require('../models');
 const Comment = db.Comment;
 
-// Lire tous les commentaires
+// Afficher tous les commentaires
 exports.getAllComment = (req, res, next) => {
   Comment.findAll({where: {postId: req.params.id}})
   .then(comments => {
@@ -12,7 +12,7 @@ exports.getAllComment = (req, res, next) => {
   .catch(error => res.status(400).json({ error }));
 };
 
-// Lire un commentaire par son id
+// Afficher un commentaire par son id
 exports.getOneComment = (req, res, next) => {
   Comment.findOne({ where: {id: req.params.id}})
   .then(comment => {

@@ -1,3 +1,4 @@
+// Exporter le model post
 module.exports = (sequelize, Sequelize) => {
   const Post = sequelize.define("Post", {
     id: {

@@ -1,3 +1,5 @@
+// LA PAGE SUPPRIMER UN POST
+
 import * as React from 'react';
 import { Navigate, Link } from 'react-router-dom';
 

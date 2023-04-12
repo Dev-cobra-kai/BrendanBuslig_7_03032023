@@ -21,7 +21,7 @@ router.get('/:id', auth, userCtrl.getOneUser); // Voir un user
 router.put('/:id', auth, multer, userCtrl.modifyUser); // Modifier un user
 router.delete('/:id', auth, userCtrl.deleteUser); // Supprimer un user
 
-// La routes pour les likes et les comments
+// La routes pour les posts
 router.get('/:id/posts', postCtrl.findPostsByUserId);
 
 // Exporter le module

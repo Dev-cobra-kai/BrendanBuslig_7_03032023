@@ -1,7 +1,8 @@
+// Importer les models de sequelize
 const db = require("../models");
 const Like = db.Like;
 
-// Lire tous les likes
+// Afficher tous les likes
 exports.getAllLike = (req, res, next) => {
   Like.findAll({where: {
     postId: req.params.id}})

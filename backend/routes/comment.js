@@ -12,4 +12,5 @@ router.get('/:id', commentCtrl.getOneComment); // Voir un commentaire
 router.get('/', commentCtrl.getAllComment); // Voir tous les commentaires
 router.delete('/:id', commentCtrl.deleteComment); // Supprimer un commentaire
 
+// Exporter le module
 module.exports = router;

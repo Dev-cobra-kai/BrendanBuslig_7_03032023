@@ -1,3 +1,4 @@
+// Exporter le model comment
 module.exports = (sequelize, Sequelize) => {
   const Comment = sequelize.define("Comment", {
     id: {

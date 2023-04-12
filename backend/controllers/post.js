@@ -7,24 +7,24 @@ const Like = db.Like;
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  // éléments de la requète
+  // Eléments de la requète
   const title = req.body.title;
-  const content =  req.body.content;
+  const content = req.body.content;
 
-  // vérification que tous les champs sont remplis
-  if(title === null || title === '' || content === null || content === '') {
-      return res.status(400).json({'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un post"});
+  // Vérification que tous les champs sont remplis
+  if (title === null || title === '' || content === null || content === '') {
+    return res.status(400).json({ 'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un post" });
   }
 
   const postObject = req.body;
 
-  // Création d'un nouvel objet article
+  // Création d'un nouvel objet post
   const post = new Post({
-        ...postObject,
-    });
-  // Enregistrement de l'objet article dans la base de données
+    ...postObject,
+  });
+  // Enregistrement de l'objet post dans la base de données
   post.save()
-    .then(() => res.status(201).json({ message: 'Post créé !'}))
+    .then(() => res.status(201).json({ message: 'Post créé !' }))
     .catch(error => res.status(400).json({ error: 'Erreur coté client' }));
 }
 

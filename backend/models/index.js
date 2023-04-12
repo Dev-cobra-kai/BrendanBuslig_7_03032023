@@ -34,6 +34,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// Importer les models 
 db.User = require("./user.js")(sequelize, Sequelize);
 db.Post = require('./post.js')(sequelize, Sequelize);
 db.Comment = require('./comment.js')(sequelize, Sequelize);
