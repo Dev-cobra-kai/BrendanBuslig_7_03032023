@@ -4,13 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
-// import Cookies from 'js-cookie';
+
 
 const Posts = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
+    // const [image, setImages] = useState([]);
     const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
@@ -54,6 +55,7 @@ const Posts = () => {
             )
     }, [token])
 
+
     if (error) {
         return <div>Erreur : {error.message}</div>;
     } else if (!isLoaded) {
@@ -87,6 +89,7 @@ const Posts = () => {
                                 })}
                                 <Link to={"/post/" + post.id} key={"post" + post.id} className="nav-link">{post.title}</Link>
                                 <p key={"content" + post.id}>{post.content}</p>
+                                <p key={"postUrl" + post.id}>{post.postUrl}</p>
                                 <p key={post.createdAt} id="created-at"><Moment fromNow key={"date" + post.id}>{post.createdAt}</Moment></p>
                             </div>
                         </div>

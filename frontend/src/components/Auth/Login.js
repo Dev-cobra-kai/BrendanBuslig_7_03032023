@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useContext, useMemo, createContext } from 'react';
 import AuthApi from './AuthApi';
 import Cookies from 'js-cookie';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const FormContext = createContext({})
@@ -43,16 +43,15 @@ function FormField({ name, type, children }) {
 }
 
 function PrimaryButton ({children}) {
-    // const navigate = useNavigate();
-    //   return <button className="btn btn-info"onClick={() => { navigate("/posts/") }}>{children}</button>
     return <button  to="/posts" className="btn btn-info">{children}</button>
 }
 
 function Login() {
-    // localStorage.clear();
-    const [error, setError] = useState(null);
+    // localStorage.clear();   
+    const [error, setError] = useState(null);  
     const Auth = React.useContext(AuthApi);
-    const handleSubmit = useCallback(function (value) {
+    const navigate = useNavigate();
+    const handleSubmit = useCallback(function (value) {      
       
         fetch("http://localhost:4000/api/users/login/", {
             method: "post",
@@ -76,6 +75,7 @@ function Login() {
                         alert("La communauté de Groupomania est contente de vous revoir !")
                     }
                     console.log(storage);
+                    navigate("/posts/");
                 },
                 (error) => {
                     if (error) {
@@ -84,7 +84,8 @@ function Login() {
                     }
                 }                           
             )
-    } , [Auth])   
+    } , [Auth,navigate])   
+    
     if (error) {
         return <div>Erreur : {error.message}</div>;
     } else {
@@ -96,7 +97,6 @@ function Login() {
                         <FormField name="email" type="text">Email</FormField>
                         <FormField name="password" type="password">Mot de passe</FormField>
                         <PrimaryButton>Me connecter</PrimaryButton>
-                        {/* <button onClick={() => { Navigate("/posts/") }}>Me connecter</button> */}
                     </FormWithContext>
                 </div>
             </React.Fragment>

@@ -90,7 +90,10 @@ class UpdatePost extends React.Component {
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
                     </Form.Group>
-                    <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>Partagez un lien de post</Field>
+                    <div className="update-image" name="postUrl" value={this.state.postUrl} onSubmit={this.handleSubmit}>
+                        <input className="form-control" type="file" name="postUrl" />
+                    </div>
+                    {/* <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>Partagez un lien de post</Field> */}
                     <div className="form-submit">
                         <button className="btn btn-outline-success btn-sm" onClick={this.handleSubmit}>Enregistrer les modifications</button>
                         <Link to='/posts/' className="btn btn-outline-info btn-sm">Retour aux posts</Link>

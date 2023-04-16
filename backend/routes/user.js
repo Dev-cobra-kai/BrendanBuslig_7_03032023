@@ -16,8 +16,8 @@ const postCtrl = require('../controllers/post');
 // Les routes d'authentification
 router.post('/signup', password, userCtrl.signup); // La route signup
 router.post('/login', userCtrl.login); // La route login
-router.get('/', auth, userCtrl.getAllUser); // Voir tous les users
-router.get('/:id', auth, userCtrl.getOneUser); // Voir un user
+router.get('/', auth, userCtrl.getAllUser); // Afficher tous les users
+router.get('/:id', auth, userCtrl.getOneUser); // Afficher un user
 router.put('/:id', auth, multer, userCtrl.modifyUser); // Modifier un user
 router.delete('/:id', auth, userCtrl.deleteUser); // Supprimer un user
 

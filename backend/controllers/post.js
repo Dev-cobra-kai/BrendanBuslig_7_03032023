@@ -9,18 +9,23 @@ const Like = db.Like;
 exports.createPost = (req, res, next) => {
   // Eléments de la requète
   const title = req.body.title;
-  const content = req.body.content;
+  // const content = req.body.content;
 
   // Vérification que tous les champs sont remplis
-  if (title === null || title === '' || content === null || content === '') {
-    return res.status(400).json({ 'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un post" });
+  if (title === null || title === '') {
+    return res.status(400).json({ 'error': "Veuillez remplir le 'Titre' pour créer un post" });
   }
-
+  if (req.file) {
+    postObject.postUrl = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
+  }
   const postObject = req.body;
 
   // Création d'un nouvel objet post
   const post = new Post({
     ...postObject,
+    // postUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
   });
   // Enregistrement de l'objet post dans la base de données
   post.save()
@@ -71,11 +76,10 @@ exports.getOnePost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
   // éléments de la requète
   const title = req.body.title;
-  const content = req.body.content;
 
   // vérification que tous les champs sont remplis
-  if (title === null || title === '' || content === null || content === '') {
-    return res.status(400).json({ 'error': "Veuillez remplir les champs 'Titre' et 'Contenu' pour créer un post" });
+  if (title === null || title === '') {
+    return res.status(400).json({ 'error': "Veuillez remplir le 'Titre' pour créer un post" });
   }
 
   const postObject = req.body;

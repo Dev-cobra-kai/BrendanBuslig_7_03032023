@@ -31,7 +31,10 @@ class DeleteComment extends React.Component {
             body: JSON.stringify(this.state)
         };
         // const { id } = useParams();
-        const commentId = this.props.match.params.id;
+        // const commentId = this.props.match.params.id;
+        // const comment = JSON.parse(localStorage.getItem('comment'));
+        let comment = JSON.parse(localStorage.getItem('postPage'));
+        let commentId = comment.id;
 
         fetch(('http://localhost:4000/api/comments/' + commentId), requestOptions)
             .then(response => response.json())
@@ -51,12 +54,9 @@ class DeleteComment extends React.Component {
     }
 
     render() {
-        const postPage = JSON.parse(localStorage.getItem('postPage'));
-        const postId = postPage.id;
-
         const { navigate } = this.state;
         if (navigate) {
-            return <Navigate to={'/post/' + postId} />;
+            return <Navigate to='/posts' />;
         }
 
         return <React.Fragment>

@@ -17,7 +17,8 @@ class CreatePost extends React.Component {
             isAdmin: userConnect.userAdmin,
             title: undefined || '',
             content: undefined || '',
-            postUrl: undefined || ''
+            postUrl: undefined || '',
+            navigate: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +30,9 @@ class CreatePost extends React.Component {
         this.setState({
             [name]: value
         })
+        // this.setState({
+        //     postUrl:e.target.files[0]
+        // })
     }
 
     handleSubmit(e) {
@@ -39,6 +43,7 @@ class CreatePost extends React.Component {
         formData.append('image', imagedata);
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
+        // const postId = storage.postId;
         let token = "Bearer " + storage.token;
 
         const requestOptions = {
@@ -50,7 +55,7 @@ class CreatePost extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:4000/api/posts/'), requestOptions, formData)
+        fetch('http://localhost:4000/api/posts/', requestOptions, formData)
             .then(response => response.json())
             .then(
                 (response) => {
@@ -60,11 +65,13 @@ class CreatePost extends React.Component {
                         this.setState({ navigate: true })
                         alert("Votre post à bien été publié !")
                     }
+
                 })
             .catch(error => {
                 this.setState({ Erreur: error.toString() });
                 console.error('Il y a eu une erreur !', error);
             });
+            console.log(imagedata);
     }
 
     render() {
@@ -76,16 +83,14 @@ class CreatePost extends React.Component {
         return <React.Fragment>
             <div className="container">
                 <h1>Publiez un post</h1>
-                <form>
+                <form onSubmit={this.handleSubmit} className="w-50 m-auto">
                     <Field name="title" value={this.state.title} onChange={this.handleChange}>Titre</Field>
                     <Form.Group controlId="exampleForm.ControlTextarea1" >
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
                     </Form.Group>
-                    <div className="update-image">
-                        <form className="addPhotoForm" name="postUrl" value={this.state.postUrl}  onSubmit={this.handleSubmit}>
-                            <input className="form-control" type="file" name="postUrl" />
-                        </form>
+                    <div className="update-image" name="postUrl" value={this.state.postUrl} onChange={this.handleChange} >
+                        <input className="form-control" type="file" name="postUrl" onChange={this.handleChange}/>
                     </div>
                     {/* <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>URL d'un post</Field> */}
                     <div className="form-submit">
