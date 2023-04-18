@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
 
-
 const Posts = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -15,10 +14,11 @@ const Posts = () => {
     const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
+    // const postId = storage.postId;
     let token = "Bearer " + storage.token;
    
     useEffect(() => {
-        fetch("http://localhost:4000/api/posts/" ,
+        fetch("http://localhost:4000/api/posts/",
             {
                 headers:
                     { "Authorization": token }
@@ -37,7 +37,7 @@ const Posts = () => {
         }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/users/",
+        fetch("http://localhost:4000/api/users/" ,
             {
                 headers:
                     { "Authorization": token }
@@ -53,7 +53,7 @@ const Posts = () => {
                     setError(error);
                 }
             )
-    }, [token])
+        }, [token])
 
 
     if (error) {

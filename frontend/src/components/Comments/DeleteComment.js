@@ -1,3 +1,5 @@
+// LA PAGE SUPPRIMER UN COMMENTAIRE
+
 import * as React from 'react';
 import { Navigate, Link } from 'react-router-dom';
 
@@ -19,8 +21,8 @@ class DeleteComment extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
 
-        const userConnect = JSON.parse(localStorage.getItem('userConnect'));
-        let token = "Bearer " + userConnect.token;
+        const storage = JSON.parse(localStorage.getItem('userConnect'));
+        let token = "Bearer " + storage.token;
 
         const requestOptions = {
             method: 'delete',

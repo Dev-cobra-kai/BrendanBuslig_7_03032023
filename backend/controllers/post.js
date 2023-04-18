@@ -7,31 +7,47 @@ const Like = db.Like;
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  // Eléments de la requète
-  const title = req.body.title;
+  //  Eléments de la requète
+  const userId = req.body.userId;
+  const title = req.body.title
   // const content = req.body.content;
-
-  // Vérification que tous les champs sont remplis
+  //  Vérification que tous les champs soient remplis
   if (title === null || title === '') {
     return res.status(400).json({ 'error': "Veuillez remplir le 'Titre' pour créer un post" });
   }
-  if (req.file) {
-    postObject.postUrl = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
-  }
-  const postObject = req.body;
+  const postObject = req.file ? {
+    postUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  } : { ...req.body };
+  delete postObject._id;
 
-  // Création d'un nouvel objet post
   const post = new Post({
     ...postObject,
-    // postUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    // title,
+    // content,
+    userId: userId,
   });
-  // Enregistrement de l'objet post dans la base de données
+
   post.save()
-    .then(() => res.status(201).json({ message: 'Post créé !' }))
+    .then(() => res.status(201).json({ message: "Post créé avec succès !" }))
     .catch(error => res.status(400).json({ error: 'Erreur coté client' }));
-}
+};
+
+// exports.createPost = (req, res, next) => {
+//   const postObject = JSON.parse(req.body.post);
+//   delete postObject._id;
+//   const post = new Post({
+//     ...postObject,
+//     postUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+//     // title,
+//     // content,
+//     // userId: userId,
+//   });
+
+//   // Enregistrement de l'objet post dans la base de données
+//   post.save()
+//     .then(() => res.status(201).json({ message: 'Post créé !' }))
+//     .catch(error => res.status(400).json({ error: 'Erreur coté client' }));
+// }
 
 // Afficher tous les posts
 exports.getAllPost = (req, res, next) => {

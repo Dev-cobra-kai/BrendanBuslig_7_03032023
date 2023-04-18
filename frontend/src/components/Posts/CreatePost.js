@@ -1,7 +1,7 @@
 // LA PAGE CREER UN POST
 
 import * as React from 'react';
-import { Navigate, Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Field from '../Form/Field';
 import Form from 'react-bootstrap/Form'
 
@@ -9,12 +9,12 @@ class CreatePost extends React.Component {
 
     state = { navigate: false };
     constructor(props) {
-        super(props)
-        const userConnect = JSON.parse(localStorage.getItem('userConnect'));
+        const storage = JSON.parse(localStorage.getItem('userConnect'));
 
+        super(props)
         this.state = {
-            userId: userConnect.userId,
-            isAdmin: userConnect.userAdmin,
+            userId: storage.userId,
+            isAdmin: storage.userAdmin,
             title: undefined || '',
             content: undefined || '',
             postUrl: undefined || '',
@@ -30,54 +30,64 @@ class CreatePost extends React.Component {
         this.setState({
             [name]: value
         })
-        // this.setState({
-        //     postUrl:e.target.files[0]
-        // })
     }
 
     handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
 
         const formData = new FormData();
         const imagedata = document.querySelector('input[type="file"]').files[0];
         formData.append('image', imagedata);
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
-        // const postId = storage.postId;
+        // const userId = storage.userId;
         let token = "Bearer " + storage.token;
 
-        const requestOptions = {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token,
-            },
-            body: JSON.stringify(this.state)
-        };
+        // const requestOptions = {
+        //     method: 'post',
+        //     headers: {
+        //         // "Content-Type": "multipart/form-data",
+        //         // 'Content-Type': 'application/json',
+        //         'Authorization': token,
+        //     },
+        //     body: formData
+        //     // body: JSON.stringify(this.state)
+        // };
 
-        fetch('http://localhost:4000/api/posts/', requestOptions, formData)
-            .then(response => response.json())
-            .then(
-                (response) => {
-                    if (response.error) {
-                        alert("Votre post n'a pas pu être publié : " + response.error);
-                    } else {
-                        this.setState({ navigate: true })
-                        alert("Votre post à bien été publié !")
-                    }
-
-                })
+        fetch("http://localhost:4000/api/posts/" ,
+            {
+                method: 'post',
+                headers: { 
+                    // "Content-Type": "multipart/form-data",
+                    "Authorization": token },
+                body: formData
+                //  body: JSON.stringify(this.state)
+            })
+            // .then(response => response.json())
+            .then((response) => {
+                if (response.error) {
+                    alert("Votre post n'a pas pu être publié : " + response.error);
+                } else {
+                    this.setState({ navigate: true })
+                    alert("Votre post à bien été publié !")
+                }
+            })
             .catch(error => {
                 this.setState({ Erreur: error.toString() });
                 console.error('Il y a eu une erreur !', error);
             });
-            console.log(imagedata);
+        console.log(formData);
+        // console.log(userId);
     }
 
     render() {
+
+        // const storage = JSON.parse(localStorage.getItem('userConnect'));
+        // const userId = storage.userId;
+
         const { navigate } = this.state;
         if (navigate) {
-            return <Navigate to='/posts' />;
+            return <Navigate to={'/posts/'} />;
         }
 
         return <React.Fragment>
@@ -89,10 +99,10 @@ class CreatePost extends React.Component {
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
                     </Form.Group>
-                    <div className="update-image" name="postUrl" value={this.state.postUrl} onChange={this.handleChange} >
-                        <input className="form-control" type="file" name="postUrl" onChange={this.handleChange}/>
+                    <div className="update-image" >
+                        <input className="form-control" type="file" name="postUrl" />
                     </div>
-                    {/* <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>URL d'un post</Field> */}
+                    {/* <Field name="postUrl" value={this.state.postUrl}> <input className="form-control" type="file" name="postUrl" /></Field> */}
                     <div className="form-submit">
                         <button className="btn btn-outline-success btn-sm" type="Submit" onClick={this.handleSubmit}>Publiez le post</button>
                         <Link to='/posts' className="btn btn-outline-info btn-sm">Retour aux posts</Link>

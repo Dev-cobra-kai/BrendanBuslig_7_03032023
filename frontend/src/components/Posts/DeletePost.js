@@ -38,17 +38,15 @@ class DeletePost extends React.Component {
 
         fetch(('http://localhost:4000/api/posts/' + postId), requestOptions)
             .then(response => response.json())
-            .then(
-                (response) => {
-                    if (response.error) {
-                        this.setState({ navigate: true })
-                        alert("Votre post n'a pas pu être supprimé.");
-                    } else {
-                        this.setState({ navigate: true })
-                        alert("Votre post à bien été supprimé !");
-
-                    }
+            .then((response) => {
+                if (response.error) {
+                    this.setState({ navigate: true })
+                    alert("Votre post n'a pas pu être supprimé.");
+                } else {
+                    this.setState({ navigate: true })
+                    alert("Votre post à bien été supprimé !");
                 }
+            }
             )
             .catch(error => {
                 this.setState({ Erreur: error.toString() });

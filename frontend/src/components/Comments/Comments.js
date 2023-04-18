@@ -1,3 +1,5 @@
+// LA PAGE CREER UN COMMENTAIRE
+
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
@@ -15,7 +17,7 @@ class Comments extends React.Component {
         this.state = {
             userId: userConnect.userId,
             postId: '',
-            content: undefined,
+            content: '',
             comments: [],
             users: []
         }
