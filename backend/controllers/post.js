@@ -8,7 +8,7 @@ const Like = db.Like;
 // Créer un post
 exports.createPost = (req, res, next) => {
   //  Eléments de la requète
-  // const userId = req.body.userId;
+  const userId = req.body.userId;
   const title = req.body.title;
   //  Vérification que tous les champs soient remplis
   if (title === null || title === '') {
@@ -21,9 +21,9 @@ exports.createPost = (req, res, next) => {
 
   const post = new Post({
     ...postObject,
-    // title,
+    title,
     // content,
-    // userId: userId,
+    userId: userId,
   });
 
   post.save()

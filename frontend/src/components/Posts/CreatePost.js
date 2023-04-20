@@ -11,6 +11,7 @@ class CreatePost extends React.Component {
     constructor(props) {
         const storage = JSON.parse(localStorage.getItem('userConnect'));
 
+      
         super(props)
         this.state = {
             userId: storage.userId,
@@ -41,16 +42,17 @@ class CreatePost extends React.Component {
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
         let token = "Bearer " + storage.token;
+        // let { id } = useParams();
 
-        fetch("http://localhost:4000/api/posts/",
+        fetch("http://localhost:4000/api/posts/" ,
             {
                 method: 'post',
                 headers: {
-                    // 'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                     "Authorization": token
                 },
-                // body: JSON.stringify(this.state)
-                body: formData
+                body: JSON.stringify(this.state)
+                // body: formData
             })
             .then(response => response.json())
             .then((response) => {

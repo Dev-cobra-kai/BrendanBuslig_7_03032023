@@ -12,33 +12,35 @@ const UsersPage = () => {
     const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
-    let token = "Bearer " +  storage.token;
+    let token = "Bearer " + storage.token;
     const { id } = useParams();
     let userId = id;
 
     useEffect(() => {
-      fetch("http://localhost:4000/api/users/" + userId,
-        {headers: 
-            {"Authorization" : token}
-        })
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setIsLoaded(true);
-                setUser(result);
-                localStorage.setItem('userAccount', JSON.stringify(result));
-            },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
-        )
+        fetch("http://localhost:4000/api/users/" + userId,
+            {
+                headers:
+                    { "Authorization": token }
+            })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setUser(result);
+                    localStorage.setItem('userAccount', JSON.stringify(result));
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
     }, [userId, token])
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/users/" + userId + "/posts/" ,
-            {headers: 
-                {"Authorization" : token},
+        fetch("http://localhost:4000/api/users/" + userId + "/posts/",
+            {
+                headers:
+                    { "Authorization": token },
             })
             .then(res => res.json())
             .then(
@@ -52,9 +54,9 @@ const UsersPage = () => {
                     setError(error);
                 }
             )
-        }, [userId, token])
+    }, [userId, token])
 
-    
+
     let idUser;
     if (error) {
         return <div>Erreur : {error.message}</div>;
@@ -62,14 +64,14 @@ const UsersPage = () => {
         return <div>Chargement...</div>;
     } else if (storage.userAdmin === true) {
         idUser = <div className="user-button">
-            <button className="btn btn-outline-danger btn-sm" onClick={() => {navigate("/adminuserdelete/" + userId)}}>Supprimer</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => { navigate("/adminuserdelete/" + userId) }}>Supprimer</button>
         </div>
     }
 
     return (
         <React.Fragment>
             <div className="container">
-            <h1>{user.firstname} {user.lastname}</h1>
+                <h1>{user.firstname} {user.lastname}</h1>
                 <div className="user-page">
                     <div className="images">
                         {user.imageUrl ?
@@ -77,7 +79,7 @@ const UsersPage = () => {
                                 src={"http://localhost:4000/images/" + user.imageUrl}
                                 alt="user"
                                 key={"userImage" + user.id}
-                            /> : 
+                            /> :
                             <img
                                 src={img}
                                 alt="user"
@@ -85,7 +87,7 @@ const UsersPage = () => {
                             />
                         }
                     </div>
-                  
+
                     {idUser}
                 </div>
                 <div className="user-post">
