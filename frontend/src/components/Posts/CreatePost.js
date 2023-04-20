@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Field from '../Form/Field';
-import Form from 'react-bootstrap/Form'
+// import Form from 'react-bootstrap/Form'
 
 class CreatePost extends React.Component {
 
@@ -16,7 +16,7 @@ class CreatePost extends React.Component {
             userId: storage.userId,
             isAdmin: storage.userAdmin,
             title: undefined || '',
-            content: undefined || '',
+            // content: undefined || '',
             postUrl: undefined || '',
             navigate: false
         }
@@ -40,30 +40,19 @@ class CreatePost extends React.Component {
         formData.append('image', imagedata);
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
-        // const userId = storage.userId;
         let token = "Bearer " + storage.token;
 
-        // const requestOptions = {
-        //     method: 'post',
-        //     headers: {
-        //         // "Content-Type": "multipart/form-data",
-        //         // 'Content-Type': 'application/json',
-        //         'Authorization': token,
-        //     },
-        //     body: formData
-        //     // body: JSON.stringify(this.state)
-        // };
-
-        fetch("http://localhost:4000/api/posts/" ,
+        fetch("http://localhost:4000/api/posts/",
             {
                 method: 'post',
-                headers: { 
-                    // "Content-Type": "multipart/form-data",
-                    "Authorization": token },
+                headers: {
+                    // 'Content-Type': 'application/json',
+                    "Authorization": token
+                },
+                // body: JSON.stringify(this.state)
                 body: formData
-                //  body: JSON.stringify(this.state)
             })
-            // .then(response => response.json())
+            .then(response => response.json())
             .then((response) => {
                 if (response.error) {
                     alert("Votre post n'a pas pu être publié : " + response.error);
@@ -76,14 +65,10 @@ class CreatePost extends React.Component {
                 this.setState({ Erreur: error.toString() });
                 console.error('Il y a eu une erreur !', error);
             });
-        console.log(formData);
-        // console.log(userId);
-    }
+        // console.log(formData);
+    };
 
     render() {
-
-        // const storage = JSON.parse(localStorage.getItem('userConnect'));
-        // const userId = storage.userId;
 
         const { navigate } = this.state;
         if (navigate) {
@@ -95,14 +80,15 @@ class CreatePost extends React.Component {
                 <h1>Publiez un post</h1>
                 <form onSubmit={this.handleSubmit} className="w-50 m-auto">
                     <Field name="title" value={this.state.title} onChange={this.handleChange}>Titre</Field>
-                    <Form.Group controlId="exampleForm.ControlTextarea1" >
+                    {/* <Form.Group controlId="exampleForm.ControlTextarea1" >
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
-                    </Form.Group>
+                    </Form.Group> */}
                     <div className="update-image" >
                         <input className="form-control" type="file" name="postUrl" />
+                        {/* <button className="btn btn-outline-success btn-sm" type="Submit" onClick={this.handleSubmitImage}>Ajouter image</button> */}
                     </div>
-                    {/* <Field name="postUrl" value={this.state.postUrl}> <input className="form-control" type="file" name="postUrl" /></Field> */}
+                    {/* <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>URL image</Field> */}
                     <div className="form-submit">
                         <button className="btn btn-outline-success btn-sm" type="Submit" onClick={this.handleSubmit}>Publiez le post</button>
                         <Link to='/posts' className="btn btn-outline-info btn-sm">Retour aux posts</Link>
@@ -114,3 +100,5 @@ class CreatePost extends React.Component {
 };
 
 export default CreatePost;
+
+
