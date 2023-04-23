@@ -20,7 +20,7 @@ class UpdatePost extends React.Component {
             isAdmin: storage.userAdmin,
             title: postPage.title,
             content: postPage.content,
-            postUrl: postPage.postUrl
+            imageUrl: postPage.imageUrl
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -90,7 +90,7 @@ class UpdatePost extends React.Component {
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
                     </Form.Group>
-                    <div className="update-image" name="postUrl" value={this.state.postUrl} onSubmit={this.handleSubmit}>
+                    <div className="update-image" name="postUrl" value={this.state.imageUrl} onSubmit={this.handleSubmit}>
                         <input className="form-control" type="file" name="postUrl" />
                     </div>
                     {/* <Field name="postUrl" value={this.state.postUrl} onChange={this.handleChange}>Partagez un lien de post</Field> */}

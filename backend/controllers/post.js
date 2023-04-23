@@ -8,12 +8,13 @@ const Like = db.Like;
 // Créer un post
 exports.createPost = (req, res, next) => {
   //  Eléments de la requète
-  const userId = req.body.userId;
+  // const userId = req.body.userId;
   const title = req.body.title;
   //  Vérification que tous les champs soient remplis
   if (title === null || title === '') {
     return res.status(400).json({ 'error': "Veuillez remplir le 'Titre' pour créer un post" });
   }
+  // const postObject = req.body;
   const postObject = req.file ? {
     postUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   } : { ...req.body };
@@ -21,34 +22,13 @@ exports.createPost = (req, res, next) => {
 
   const post = new Post({
     ...postObject,
-    title,
-    // content,
-    userId: userId,
+    // userId: userId,
   });
 
   post.save()
     .then(() => res.status(201).json({ message: "Post créé avec succès !" }))
     .catch(error => res.status(400).json({ error: 'Erreur coté client' }));
 };
-
-// exports.createPost = (req, res, next) => {
-//   const postObject = req.file ? {
-//         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-//       } : { ...req.body };
-//       delete postObject._id;
-//   const post = new Post({
-//     ...postObject,
-//     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-//     // title,
-//     // content,
-//     // userId: userId,
-//   });
-
-//   // Enregistrement de l'objet post dans la base de données
-//   post.save()
-//     .then(() => res.status(201).json({ message: 'Post créé !' }))
-//     .catch(error => res.status(400).json({ error: 'Erreur coté client' }));
-// }
 
 // Afficher tous les posts
 exports.getAllPost = (req, res, next) => {
@@ -63,6 +43,7 @@ exports.getAllPost = (req, res, next) => {
     })
     .catch(error => res.status(400).json({ error }));
 };
+
 
 // Trouver tous les posts de userId
 exports.findPostsByUserId = (req, res, next) => {

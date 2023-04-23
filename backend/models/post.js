@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.TEXT
     },
 
-    postUrl: {
+    imageUrl: {
       allowNull: true,
       type: Sequelize.STRING
     },

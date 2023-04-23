@@ -147,8 +147,8 @@ function PostPage() {
                         <div className="post-page">
                             <div className="show-post">
                                 <p>{post.content}</p>
-                                {post.postUrl
-                                    ? <a target="_blank" rel="noopener noreferrer" className="nav-link" href={post.postUrl} >{post.postUrl}</a> : null}
+                                {post.imageUrl
+                                    ? <a target="_blank" rel="noopener noreferrer" className="nav-link" href={post.imageUrl} >{post.imageUrl}</a> : null}
                             </div>
                             {userAuth}
                         </div>
