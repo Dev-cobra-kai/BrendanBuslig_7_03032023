@@ -6,7 +6,6 @@ import Field from '../Form/Field';
 
 const CreatePost = () => {
 
-
     // const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -59,6 +58,11 @@ const CreatePost = () => {
         setFile(null)
     };
 
+        // const handleImage = (e) => {
+    //     setImage(URL.createObjectURL(e.target.files[0]));
+    //     setFile(e.target.files[0]);
+    //   }
+
     return (
         <div>
 
@@ -84,7 +88,7 @@ const CreatePost = () => {
 
 
             <Form.Label htmlFor="file">
-                <img sx={{ fontSize: { xs: 30, lg: 36 }, color: "#3e3e42", "&:hover": { color: "#24b6a9" }, cursor: "pointer" }} />
+                {/* <img sx={{ fontSize: { xs: 30, lg: 36 }, color: "#3e3e42", "&:hover": { color: "#24b6a9" }, cursor: "pointer" }} /> */}
             </Form.Label>
             <input type="file"
                 id='file'

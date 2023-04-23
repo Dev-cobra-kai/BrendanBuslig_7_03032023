@@ -8,21 +8,25 @@ const Like = db.Like;
 // Créer un post
 exports.createPost = (req, res, next) => {
   //  Eléments de la requète
-  // const userId = req.body.userId;
   const title = req.body.title;
   //  Vérification que tous les champs soient remplis
   if (title === null || title === '') {
     return res.status(400).json({ 'error': "Veuillez remplir le 'Titre' pour créer un post" });
   }
-  // const postObject = req.body;
+ 
   const postObject = req.file ? {
-    postUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   } : { ...req.body };
-  delete postObject._id;
+  // delete postObject._id;
+
+  // const postObject = req.file ?
+  // {
+  //   ...req.body.post,
+  //   imageUrl: req.file.filename
+  // } : { ...req.body };
 
   const post = new Post({
     ...postObject,
-    // userId: userId,
   });
 
   post.save()

@@ -10,13 +10,13 @@ const Posts = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
-    const [image, setImage] = useState('');
-    const [file, setFile] = useState(null);
+    // const [image, setImage] = useState('');
+    // const [file, setFile] = useState(null);
     const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     let token = "Bearer " + storage.token;
-   
+
     useEffect(() => {
         fetch("http://localhost:4000/api/posts/",
             {
@@ -34,10 +34,10 @@ const Posts = () => {
                     setError(error);
                 }
             )
-        }, [token])
+    }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/users/" ,
+        fetch("http://localhost:4000/api/users/",
             {
                 headers:
                     { "Authorization": token }
@@ -53,35 +53,9 @@ const Posts = () => {
                     setError(error);
                 }
             )
-        }, [token])
+    }, [token])
 
-        const handleImage = (e) => {
-            setImage(URL.createObjectURL(e.target.files[0]));
-            setFile(e.target.files[0]);
-          }
-        
-
-        useEffect(() => {
-            fetch("http://localhost:4000/api/posts/" ,
-                {
-                    headers:
-                        { "Authorization": token }
-                })
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        setIsLoaded(true);
-                        setImage(result);
-                        localStorage.setItem('postPage', JSON.stringify(result));
-                    },
-                    (error) => {
-                        setIsLoaded(true);
-                        setError(error);
-                    }
-                )
-        }, [token])
-
-
+    
     if (error) {
         return <div>Erreur : {error.message}</div>;
     } else if (!isLoaded) {
@@ -116,7 +90,8 @@ const Posts = () => {
                                 <Link to={"/post/" + post.id} key={"post" + post.id} className="nav-link">{post.title}</Link>
                                 <p key={"content" + post.id}>{post.content}</p>
                                 <p key={"imageUrl" + post.id}>{post.imageUrl}</p>
-                                <img src={"http://localhost:4000/images/" + post.imageUrl} alt="post" key={"postImage" + post.id} />
+                                <button className="btn btn-outline-info btn-sm" onClick={() => { navigate("/imagepost/") }}>Ajouter une image</button>
+                                {/* <img src={"http://localhost:4000/images/" + post.imageUrl} alt="post" key={"postImage" + post.id} /> */}
                                 <p key={post.createdAt} id="created-at"><Moment fromNow key={"date" + post.id}>{post.createdAt}</Moment></p>
                             </div>
                         </div>

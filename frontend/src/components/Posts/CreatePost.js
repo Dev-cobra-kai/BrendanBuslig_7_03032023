@@ -9,7 +9,7 @@ class CreatePost extends React.Component {
 
     state = { navigate: false };
     constructor(props) {
-        
+
         const storage = JSON.parse(localStorage.getItem('userConnect'));
 
         super(props)
@@ -23,6 +23,7 @@ class CreatePost extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleImage = this.handleImage.bind(this);
     }
 
     handleChange(e) {
@@ -31,6 +32,34 @@ class CreatePost extends React.Component {
         this.setState({
             [name]: value
         })
+    }
+
+    handleImage = (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData();
+
+        const imagedata = document.querySelector('input[type="file"]').files[0];
+        formData.append('image', imagedata);
+
+        const storage = JSON.parse(localStorage.getItem('userConnect'));
+        let token = "Bearer " + storage.token;
+
+        fetch("http://localhost:4000/api/posts/",
+            {
+                method: 'post',
+                headers: {
+                    // 'Content-Type': 'application/json',
+                    // 'Content-Type': 'multipart/form-data',
+                    "Authorization": token
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .catch(error => {
+                console.error('Il y a eu une erreur !', error);
+            });
+        console.log(formData);
     }
 
     handleSubmit(e) {
@@ -70,6 +99,7 @@ class CreatePost extends React.Component {
                 this.setState({ Erreur: error.toString() });
                 console.error('Il y a eu une erreur !', error);
             });
+        console.log(storage);
     };
 
     render() {
@@ -81,18 +111,22 @@ class CreatePost extends React.Component {
         return <React.Fragment>
             <div className="container">
                 <h1>Publiez un post</h1>
-                <form className="w-50 m-auto">
+                <Form onSubmit={this.handleSubmit} className="w-50 m-auto">
                     <Field name="title" value={this.state.title} onChange={this.handleChange}>Titre</Field>
                     <Form.Group controlId="exampleForm.ControlTextarea1" >
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
                     </Form.Group>
                     {/* <Field name="imageUrl" value={this.state.imageUrl} onChange={this.handleChange}>URL image</Field> */}
+                    <Form.Group className="my-3">
+                        <Form.Label>Ajouter une image :</Form.Label>
+                        <Form.Control type="file" name="image" onChange={this.handleImage} />
+                    </Form.Group>
                     <div className="form-submit">
                         <button className="btn btn-outline-success btn-sm" type="Submit" onClick={this.handleSubmit}>Publiez le post</button>
                         <Link to='/posts' className="btn btn-outline-info btn-sm">Retour aux posts</Link>
                     </div>
-                </form>
+                </Form>
             </div>
         </React.Fragment>
     };
