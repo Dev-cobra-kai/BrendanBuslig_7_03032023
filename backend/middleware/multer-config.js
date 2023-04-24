@@ -20,9 +20,5 @@ const storage = multer.diskStorage({
     }
 });
 
-// app.post('/api/posts', upload.single('imageUrl'), (req, res, next) => {
-//     // do something with the uploaded image
-//     // ...
-//   })
 
-module.exports = multer({ storage }).single('image');
+module.exports = multer({ storage }).single('imageUrl');

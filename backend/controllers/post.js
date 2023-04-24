@@ -15,16 +15,11 @@ exports.createPost = (req, res, next) => {
   }
  
   const postObject = req.file ? {
+    ...req.body,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   } : { ...req.body };
-  // delete postObject._id;
 
-  // const postObject = req.file ?
-  // {
-  //   ...req.body.post,
-  //   imageUrl: req.file.filename
-  // } : { ...req.body };
-
+  console.log(postObject);
   const post = new Post({
     ...postObject,
   });

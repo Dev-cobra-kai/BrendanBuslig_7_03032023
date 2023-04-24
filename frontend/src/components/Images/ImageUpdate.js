@@ -22,7 +22,7 @@ class ImageUpdate extends React.Component {
 
         const formData = new FormData();
         const imagedata = document.querySelector('input[type="file"]').files[0];
-        formData.append('image', imagedata);
+        formData.append('imageUrl', imagedata);
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
         const userId = storage.userId;

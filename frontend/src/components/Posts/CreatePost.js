@@ -36,55 +36,33 @@ class CreatePost extends React.Component {
 
     handleImage = (e) => {
         e.preventDefault();
-        
-        const formData = new FormData();
 
-        const imagedata = document.querySelector('input[type="file"]').files[0];
-        formData.append('image', imagedata);
+        const imagedata = document.querySelector('input[type="file"]').files[0]
 
-        const storage = JSON.parse(localStorage.getItem('userConnect'));
-        let token = "Bearer " + storage.token;
-
-        fetch("http://localhost:4000/api/posts/",
-            {
-                method: 'post',
-                headers: {
-                    // 'Content-Type': 'application/json',
-                    // 'Content-Type': 'multipart/form-data',
-                    "Authorization": token
-                },
-                body: formData
-            })
-            .then(response => response.json())
-            .catch(error => {
-                console.error('Il y a eu une erreur !', error);
-            });
-        console.log(formData);
+        this.setState({
+            imageUrl: imagedata
+        })
     }
 
     handleSubmit(e) {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('userId', this.state.userId);
+        formData.append('isAdmin', this.state.isAdmin);
+        formData.append('title', this.state.title);
+        formData.append('content', this.state.content);
+        formData.append('imageUrl', this.state.imageUrl);
 
         const storage = JSON.parse(localStorage.getItem('userConnect'));
         let token = "Bearer " + storage.token;
-
-        // const requestOptions = {
-        //     method: 'post',
-        //     headers: { 
-        //         'Content-Type': 'application/json',
-        //         'Authorization': token
-        //     },
-        //     body: JSON.stringify(this.state)
-        // };
 
         fetch("http://localhost:4000/api/posts/",
             {
                 method: 'post',
                 headers: {
-                    'Content-Type': 'application/json',
                     "Authorization": token
                 },
-                body: JSON.stringify(this.state)
+                body: formData
             })
             .then(response => response.json())
             .then((response) => {
@@ -99,7 +77,7 @@ class CreatePost extends React.Component {
                 this.setState({ Erreur: error.toString() });
                 console.error('Il y a eu une erreur !', error);
             });
-        console.log(storage);
+        console.log(formData);
     };
 
     render() {
@@ -117,10 +95,9 @@ class CreatePost extends React.Component {
                         <Form.Label>Contenu du post</Form.Label>
                         <Form.Control as="textarea" rows={8} name="content" value={this.state.content} onChange={this.handleChange} />
                     </Form.Group>
-                    {/* <Field name="imageUrl" value={this.state.imageUrl} onChange={this.handleChange}>URL image</Field> */}
                     <Form.Group className="my-3">
                         <Form.Label>Ajouter une image :</Form.Label>
-                        <Form.Control type="file" name="image" onChange={this.handleImage} />
+                        <Form.Control type="file" name="imageUrl" onChange={this.handleImage} />
                     </Form.Group>
                     <div className="form-submit">
                         <button className="btn btn-outline-success btn-sm" type="Submit" onClick={this.handleSubmit}>Publiez le post</button>
