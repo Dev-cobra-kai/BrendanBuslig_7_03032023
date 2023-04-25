@@ -11,21 +11,12 @@ module.exports = (req, res, next) => {
         const userId = decodedToken.userId;
         const isAdmin = decodedToken.isAdmin;
         req.auth = {
-            userId: userId ,
+            userId: userId,
             isAdmin: isAdmin
-        }; 
+        };
         console.log(userId)
         console.log(isAdmin)
-            next();
-        // if (req.body.userId && req.body.userId !== userId) {
-        //     return res.status(401).json({ error: "User ID non valable !" })
-        // } else if (req.body.isAdmin && req.body.isAdmin !== isAdmin) {
-        //     console.log(isAdmin)
-        //     return res.status(401).json({ error: "User role non valable !" })
-        // } else {
-        //     console.log(decodedToken)
-        //     next();
-        // }
+        next();
     } catch {
         res.status(401).json({
             error: "Authentification nécessaire !",

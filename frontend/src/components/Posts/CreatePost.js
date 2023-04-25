@@ -5,6 +5,7 @@ import { Link, Navigate } from 'react-router-dom';
 import Field from '../Form/Field';
 import Form from 'react-bootstrap/Form'
 
+
 class CreatePost extends React.Component {
 
     state = { navigate: false };

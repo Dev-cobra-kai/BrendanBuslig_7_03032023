@@ -1,6 +1,3 @@
-// Models : Permet de créer des schémas de données qui contiennent les champs souhaités
-// pour indiquer leur type ainsi que leur caractère (obligatoire ou non)
-
 // Pour enregistrer un nouvel utilisateur (user) dans la BDD
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define("User", {
@@ -55,9 +52,6 @@ module.exports = (sequelize, Sequelize) => {
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
-      //   get() {
-      //     return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
-      // }
     },
 
     updatedAt: {

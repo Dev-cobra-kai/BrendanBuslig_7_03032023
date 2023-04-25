@@ -1,3 +1,5 @@
+// Controllers : Permet de mettre tous les codes d'implémentation de routes
+
 // Importer les models de sequelize
 const db = require('../models');
 const Comment = db.Comment;

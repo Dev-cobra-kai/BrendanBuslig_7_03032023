@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Navigate, Link } from 'react-router-dom';
 
+
 class DeletePost extends React.Component {
     state = { navigate: false };
 

@@ -1,8 +1,6 @@
 // Se connecter à la base MySQL avec le module sequelize
 const dbConfig = require('../config/dbConfig');
 
-// const {Sequelize, DataTypes} = require('sequelize');
-
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(

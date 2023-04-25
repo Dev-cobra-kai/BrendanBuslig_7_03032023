@@ -5,11 +5,9 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
 import Form from 'react-bootstrap/Form'
-// import { useParams } from 'react-router-dom';
 
 class Comments extends React.Component {
 
-    // const navigate = useNavigate();
     constructor(props) {
         super(props)
         const userConnect = JSON.parse(localStorage.getItem('userConnect'));
@@ -28,7 +26,7 @@ class Comments extends React.Component {
     componentDidMount() {
         const userConnect = JSON.parse(localStorage.getItem('userConnect'));
         let token = "Bearer " + userConnect.token;
-        // const { id } = useParams();
+       
         const postId = this.props.id;
         fetch("http://localhost:4000/api/posts/" + postId + "/comments/",
             {
@@ -154,7 +152,6 @@ class Comments extends React.Component {
                             <p key={"comment" + comment.id} className="content-comment">{comment.content}</p>
                             {comment.userId === userConnect.userId || userConnect.userAdmin === true
                                 ? <div className="post-option">
-                                    {/* <Link to={"/deletecomment/" + comment.id} key={"delete" + comment.id} className="nav-link">Supprimer</Link> */}
                                 </div> : null
                             }
                         </div>

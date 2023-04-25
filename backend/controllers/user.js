@@ -1,5 +1,3 @@
-// Controllers : Permet de mettre tous les codes d'implémentation de routes
-
 // Importer les models de sequelize
 const db = require('../models');
 // Importer Bcrypt pour hasher le password (Empêche de récupérer les données personnelles)

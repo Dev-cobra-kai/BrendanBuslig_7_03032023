@@ -8,7 +8,7 @@
     transform: scale(0.8);
     opacity: 0.9;
     transition: transform 300ms ease-in-out;
-    transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+    transition: transform 300ms ease-in-out;
 }
 
 #root a img:hover {
@@ -583,7 +583,6 @@
 
     .update-image .addPhotoForm {
         display: flex;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -742,8 +741,6 @@
     }
 
     .user-page .user-button {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
         flex-direction: row;
         justify-content: center;

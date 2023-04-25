@@ -1,3 +1,6 @@
+// Models : Permet de créer des schémas de données qui contiennent les champs souhaités
+// pour indiquer leur type ainsi que leur caractère (obligatoire ou non)
+
 // Exporter le model comment
 module.exports = (sequelize, Sequelize) => {
   const Comment = sequelize.define("Comment", {

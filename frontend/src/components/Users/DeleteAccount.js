@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import AuthApi from '../Auth/AuthApi';
 import Cookies from 'js-cookie';
 
+
 function DeleteAccount () {
     const Auth = React.useContext(AuthApi);
 
