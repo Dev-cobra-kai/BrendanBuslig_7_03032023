@@ -55,9 +55,9 @@ module.exports = (sequelize, Sequelize) => {
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
-    //   get() {
-    //     return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
-    // }
+      //   get() {
+      //     return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
+      // }
     },
 
     updatedAt: {

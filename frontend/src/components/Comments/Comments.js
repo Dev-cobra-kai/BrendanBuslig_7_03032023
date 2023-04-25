@@ -154,7 +154,7 @@ class Comments extends React.Component {
                             <p key={"comment" + comment.id} className="content-comment">{comment.content}</p>
                             {comment.userId === userConnect.userId || userConnect.userAdmin === true
                                 ? <div className="post-option">
-                                    <Link to={"/deletecomment/" + comment.id} key={"delete" + comment.id} className="nav-link">Supprimer</Link>
+                                    {/* <Link to={"/deletecomment/" + comment.id} key={"delete" + comment.id} className="nav-link">Supprimer</Link> */}
                                 </div> : null
                             }
                         </div>

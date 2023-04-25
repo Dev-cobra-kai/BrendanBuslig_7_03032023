@@ -36,9 +36,7 @@ class CreatePost extends React.Component {
 
     handleImage = (e) => {
         e.preventDefault();
-
         const imagedata = document.querySelector('input[type="file"]').files[0]
-
         this.setState({
             imageUrl: imagedata
         })

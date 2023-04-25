@@ -17,7 +17,6 @@ import PostPage from '../components/Posts/PostPage';
 import CreatePost from '../components/Posts/CreatePost';
 import UpdatePost from '../components/Posts/UpdatePost';
 import DeletePost from '../components/Posts/DeletePost';
-import DeleteComment from '../components/Comments/DeleteComment';
 import ImageUpdate from '../components/Images/ImageUpdate';
 
 const Router = () => {
@@ -38,7 +37,6 @@ const Router = () => {
             <Route path="/post/:id" auth={Auth.auth} element={<PostPage />} />
             <Route path="/postupdate/:id" auth={Auth.auth} element={<UpdatePost />} />
             <Route path="/postdelete/:id" auth={Auth.auth} element={<DeletePost />} />
-            <Route path="/deletecomment/:id" auth={Auth.auth} element={<DeleteComment />} />
             <Route path="/imageupdate/:id" auth={Auth.auth} element={<ImageUpdate />} />
             <Route path="/adminuserdelete/:id" auth={Auth.auth} element={<DeleteUserAccount />} />
         </Routes>

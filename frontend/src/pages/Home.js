@@ -1,3 +1,5 @@
+// LA PAGE D'ACCUEIL
+
 import React from 'react';
 import {Link} from 'react-router-dom';
 

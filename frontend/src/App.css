@@ -111,6 +111,13 @@
     border: 1px solid black;
 }
 
+.post-card .image-post img {
+    width: 90%;
+    height: 10%;
+    border-radius: 5%;
+    border: none
+}
+
 .post-card .show-post {
     margin: 0.5em;
 }
@@ -249,9 +256,9 @@
 }
 
 .user-post p {
-     font-size: 0.9em;
+    font-size: 0.9em;
     text-align: left;
-    color: #4E5166; 
+    color: #4E5166;
 }
 
 .user-post a {
@@ -484,7 +491,6 @@
 
 /* Page modifier image */
 .update-image {
-    -webkit-box-shadow: 0 0 20px #FFD7D7;
     box-shadow: 0 0 20px #FFD7D7;
     margin-top: 1.5em;
     padding: 2em;

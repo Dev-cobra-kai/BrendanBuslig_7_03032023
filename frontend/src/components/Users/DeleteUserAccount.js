@@ -1,3 +1,5 @@
+// LA PAGE ADMIN SUPPRIMER UN USER
+
 import React, { useState, useCallback } from 'react';
 import { Navigate, Link, useParams } from 'react-router-dom';
 

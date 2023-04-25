@@ -53,7 +53,7 @@ const Posts = () => {
             )
     }, [token])
 
-    
+
     if (error) {
         return <div>Erreur : {error.message}</div>;
     } else if (!isLoaded) {
@@ -87,7 +87,9 @@ const Posts = () => {
                                 })}
                                 <Link to={"/post/" + post.id} key={"post" + post.id} className="nav-link">{post.title}</Link>
                                 <p key={"content" + post.id}>{post.content}</p>
-                                <img src={post.imageUrl} alt="post" key={"imageUrl" + post.id} />
+                                <div className="image-post">
+                                    <img src={post.imageUrl} alt="" key={"imageUrl" + post.id} />
+                                </div>
                                 <p key={post.createdAt} id="created-at"><Moment fromNow key={"date" + post.id}>{post.createdAt}</Moment></p>
                             </div>
                         </div>

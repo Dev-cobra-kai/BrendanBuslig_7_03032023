@@ -10,7 +10,6 @@ const commentCtrl = require('../controllers/comment');
 router.post('/', commentCtrl.createComment); // Créer un commentaire
 router.get('/:id', commentCtrl.getOneComment); // Afficher un commentaire
 router.get('/', commentCtrl.getAllComment); // Afficher tous les commentaires
-router.delete('/:id', commentCtrl.deleteComment); // Supprimer un commentaire
 
 // Exporter le module
 module.exports = router;

@@ -1,3 +1,5 @@
+// LA PAGE MODIFIER IMAGE USER
+
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -69,3 +71,4 @@ class ImageUpdate extends React.Component {
 }
 
 export default ImageUpdate;
+

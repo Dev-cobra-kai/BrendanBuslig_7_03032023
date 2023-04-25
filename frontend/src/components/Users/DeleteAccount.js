@@ -1,3 +1,5 @@
+// LA PAGE SUPPRIMER UN USER
+
 import React, {useCallback} from 'react';
 import { Link } from 'react-router-dom';
 import AuthApi from '../Auth/AuthApi';

@@ -9,11 +9,6 @@ const jwt = require('jsonwebtoken');
 // Importer du module fs de node.js pour accéder aux fichiers du serveur
 const fs = require('fs');
 
-// const User = db.User;
-// const Post = db.Post;
-// const Comment = db.Comment;
-// const Like = db.Like;
-
 // Créer un nouvel user dans la BDD (sign up)
 exports.signup = (req, res, next) => {
   // Hasher le password avant de l'envoyer dans la BDD  

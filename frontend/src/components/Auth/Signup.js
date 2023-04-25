@@ -1,10 +1,11 @@
+// LA PAGE SIGNUP
+
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 class Signup extends React.Component {
 
     state = { navigate: false }
-    // navigate(to, { state={}, replace=false })
 
     constructor(props) {
         super(props)

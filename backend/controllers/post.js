@@ -19,7 +19,6 @@ exports.createPost = (req, res, next) => {
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   } : { ...req.body };
 
-  console.log(postObject);
   const post = new Post({
     ...postObject,
   });
@@ -79,7 +78,11 @@ exports.modifyPost = (req, res, next) => {
     return res.status(400).json({ 'error': "Veuillez remplir le 'Titre' pour créer un post" });
   }
 
-  const postObject = req.body;
+  const postObject = req.file ? {
+    ...req.body,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    // imageUrl: req.file.filename
+  } : { ...req.body };
 
   Post.update({ ...postObject, id: req.params.id }, { where: { id: req.params.id } })
     .then(() => res.status(200).json({ message: 'Post modifié !' }))
