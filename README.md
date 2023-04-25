@@ -1,5 +1,5 @@
 # frontend
-Pour lancer le serveur : `cd frontend` ensuite `$ npm run start`
+Pour lancer le serveur : `cd frontend` ensuite `$ npm start`
 
 # backend
 Pour lancer le serveur : `cd backend` ensuite `$ node server` puis apparait : 
