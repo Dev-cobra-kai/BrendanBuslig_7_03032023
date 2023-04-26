@@ -22,7 +22,7 @@ router.put('/:id', auth, multer, userCtrl.modifyUser); // Modifier un user
 router.delete('/:id', auth, userCtrl.deleteUser); // Supprimer un user
 
 // La routes pour les posts
-router.get('/:id/posts', postCtrl.findPostsByUserId);
+router.get('/:id/posts', postCtrl.findPostsByUserId); // Trouver tous les posts de userId
 
 // Exporter le module
 module.exports = router;

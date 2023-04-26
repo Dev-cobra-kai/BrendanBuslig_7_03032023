@@ -59,7 +59,7 @@ db.sequelize.sync({ force: false })
   .then(() => { console.log('Synchronisation terminée !') })
   .catch((error) => console.log("Synchronisation pas effectuée !", error));
 
-// Transformer le body en JSON avec bodu-parser
+// Transformer le body en JSON avec body-parser
 app.use(bodyParser.json());
 
 // Transformer le body en JSON avec express
