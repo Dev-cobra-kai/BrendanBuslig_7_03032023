@@ -1,15 +1,14 @@
 # frontend
-Pour lancer React : 
-Faire npx create-react-app `frontend`
-puis faire `cd frontend` 
-Ensuite il faut installer des modules :
+Pour lancer React :  
+Faire npx create-react-app `frontend` puis faire `cd frontend`  
+Ensuite il faut installer des modules :  
 - npm install bootstrap
 - npm install js-cookie
 - npm install moment
 - npm install react-bootstrap
 - npm install react-moment
 - npm install react-icons
-- npm install react-router-dom
+- npm install react-router-dom  
 Enfin faire `$ npm start` pour lancer le frontend
 
 # backend
