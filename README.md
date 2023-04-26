@@ -33,7 +33,8 @@ Ensuite il faut installer des modules :
 - npm install nodemon
 - npm install password-validator
 - npm install sequelize  
-puis faire `$ node server` et apparait :  
+
+Puis faire `$ node server` et apparait :  
 Listening on port 4000,  
 Connecté à la base de données !  
 Synchronisation terminée !  
