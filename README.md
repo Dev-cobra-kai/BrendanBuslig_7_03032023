@@ -1,4 +1,4 @@
-# frontend
+# Frontend
 Pour lancer React :  
 Faire npx create-react-app `frontend` puis faire `cd frontend`  
 Ensuite il faut installer des modules :  
@@ -12,7 +12,7 @@ Ensuite il faut installer des modules :
 
 Enfin faire `$ npm start` pour lancer le frontend
 
-# backend
+# Backend
 Pour lancer le serveur MySQL :  
 Il faut télécharger XAMPP, puis lancer XAMPP et sur les modules Apache et MySQL faire un `Start`  
 Pour aller sur phpMyAdmin et créer des tables cliquer sur Admin du module MySQL  
