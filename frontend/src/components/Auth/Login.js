@@ -70,13 +70,14 @@ function Login() {
                     if (storage.token === undefined) {
                         Auth.setAuth(false)
                         alert("Utilisateur non identifié. Tentez de vous connecter à nouveau !")
+                        navigate("/");
                     } else {
                         Auth.setAuth(true)
                         Cookies.set("user", storage.token)
                         alert("La communauté de Groupomania est contente de vous revoir !")
+                        navigate("/posts/");
                     }
                     console.log(storage);
-                    navigate("/posts/");
                 },
                 (error) => {
                     if (error) {
