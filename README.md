@@ -1,16 +1,10 @@
 # Créez un réseau social d’entreprise
 
 Scénario :  
-Vous êtes développeur depuis plus d'un an chez
-CONNECT-E
-, une petite agence webregroupant une douzaine d'employés.
+Vous êtes développeur depuis plus d'un an chez CONNECT-E , une petite agence webregroupant une douzaine d'employés.
 Votre directrice, Stéphanie, invite toute l'agence à prendre un verre pour célébrer unebonne nouvelle ! Elle vient de signer un contrat pour un nouveau projet ambitieux ! 🥂
-Le client en question est
-Groupomania
-, un groupe spécialisé dans la grande distribution etl'un des plus 􀁽dèles clients de l'agence.
-Le projet consiste à construire un
-réseau social interne
-pour les employés deGroupomania. Le but de cet outil est de faciliter les interactions entre collègues. Ledépartement RH de Groupomania a laissé libre cours à son imagination pour lesfonctionnalités du réseau et a imaginé plusieurs briques pour favoriser les échanges entrecollègues.
+Le client en question est Groupomania, un groupe spécialisé dans la grande distribution etl'un des plus 􀁽dèles clients de l'agence.
+Le projet consiste à construire un réseau social interne pour les employés deGroupomania. Le but de cet outil est de faciliter les interactions entre collègues. Ledépartement RH de Groupomania a laissé libre cours à son imagination pour lesfonctionnalités du réseau et a imaginé plusieurs briques pour favoriser les échanges entrecollègues.
 
 # Frontend
 Pour lancer React :  
